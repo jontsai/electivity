@@ -5,7 +5,8 @@ var express = require('express'),
   routes = require('./controllers/index'),
   messages = require('./controllers/api/messages'),
   http = require('http'),
-  path = require('path');
+  path = require('path'),
+  hoganExpress = require('hogan-express');
 
 var app = module.exports = express();
 
@@ -16,7 +17,12 @@ var app = module.exports = express();
 /** All environments */
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
+app.set('layout', 'layout/layout'); //rendering by default
+app.set('partials', {head: "layout/head"}); // add partials to be used here
+app.engine('html', hoganExpress);
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -25,7 +31,6 @@ app.use(express.cookieParser());
 /** Simple session storage */
 app.use(express.session({secret: 'vkjHei93bjbf48GH84jjeU'}));
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 // development only
@@ -43,8 +48,8 @@ if (app.get('env') === 'production') {
  */
 // serve index and view partials
 app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
-app.get('/partials/:directory/:name', routes.subpartials);
+app.get('/templates/:name', routes.templates);
+app.get('/templates/:directory/:name', routes.subtemplates);
 app.get('/api/0/messages', messages.collection);
 app.get('/api/0/messages/:id', messages.get);
 

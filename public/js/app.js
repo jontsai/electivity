@@ -10,12 +10,8 @@ angular.module('myApp', [
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'partials/index',
+      templateUrl: 'templates/choose-screen',
       controller: 'IndexController'
-    }).
-    when('/message/:id', {
-      templateUrl: 'partials/view',
-      controller: 'ViewController'
     }).
     otherwise({
       redirectTo: '/'

@@ -4,16 +4,16 @@
  */
 
 exports.index = function(req, res){
-  res.render('index');
+  res.render('partials/default');
 };
 
-exports.partials = function (req, res) {
+exports.templates = function (req, res) {
   var name = req.params.name;
-  res.render('partials/' + name);
+  res.render('templates/' + name);
 };
 
-exports.subpartials = function (req, res) {
+exports.subtemplates = function (req, res) {
   var name = req.params.name;
   var directory = req.params.directory;
-  res.render('partials/' + directory + '/' + name);
+  res.render('templates/' + directory + '/' + name);
 };
