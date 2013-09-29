@@ -10,7 +10,6 @@ var _fbWeather = _fb.child('weather');
 var _fbFlickr = _fb.child('flickr');
 
 var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
-//var localQuery='select * from local.search where query="sushi" and location="san francisco, ca"';
 var weatherQuery = 'SELECT * FROM weather.forecast(0,30) WHERE (location = @location)';
 var flickrQuery = 'SELECT * FROM flickr.photos.search(0,30) WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
 
@@ -71,10 +70,7 @@ exports.collection = function(request, response) {
     
     when.all(deferreds).then(
         function(results) {
-            response.json(results);
-            // console.log(results.length);
-            // console.log(results);
-            // var output = results[0], i = 0;
+            var output = results[0], i = 0;
             // console.log(results[1].photo.length);
             // results[1].photo.forEach(function(image) {
             //     if(typeof image.farm !== undefined 
@@ -88,7 +84,7 @@ exports.collection = function(request, response) {
             //         console.log(image);
             //     }
             // });
-            // response.json(output);
+            response.json(output);
         }
     );
 }
