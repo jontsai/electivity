@@ -11,7 +11,7 @@ angular.module('myApp.directives', [])
 .directive('timer', function() {
 	return {
 		restrict: 'E',
-      	link: function (scope, elem) {
+      link: function (scope, elem) {
 			function countdown(value) {
 				if(value <= 0){
 			    	scope.finished = true;

@@ -74,7 +74,7 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
                     if($scope.items.length === 0) {
                         $location.path('/survey/' + $scope.survey.id + '/results');
                     }
-                  $scope.items.shift();
+                  $scope.items.shift();   
             });
         };
 
