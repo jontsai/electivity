@@ -65,7 +65,7 @@ angular.module('myApp.directives', [])
         return geoInfo;
       }
 
-    	google.maps.event.addListener(autocomplete, 'place_changed', function(value) {
+    	google.maps.event.addListener(autocomplete, 'place_changed', function() {
       		var place = autocomplete.getPlace();
           scope.form.geoinfo = formatGeoInfo(place);
     	});
@@ -83,20 +83,27 @@ angular.module('myApp.directives', [])
 
   // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
   function handleScoreAdded(scoreSnapshot, prevScoreName) {
-    var newScoreRow = $("<tr/>");
-    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
-    newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
-
+    // var newScoreRow = $("<tr/>");
+    // newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
+    // newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
+    var newScoreRow = $("<li/>");
+    newScoreRow.addClass('leaderboard-result');
+    //var newScoreRow = $("<tr/>");
+    newScoreRow.append(scoreSnapshot.val().name);
+    newScoreRow.append(' '+scoreSnapshot.val().score);
     // Store a reference to the table row so we can get it again later.
     htmlForPath[scoreSnapshot.name()] = newScoreRow;
 
     // Insert the new score in the appropriate place in the table.
     if (prevScoreName === null) {
       $("#leaderboardTable").append(newScoreRow);
+      newScoreRow.addClass('first-place');
     }
     else {
       var lowerScoreRow = htmlForPath[prevScoreName];
       lowerScoreRow.before(newScoreRow);
+      lowerScoreRow.removeClass('first-place');
+      newScoreRow.addClass('first-place');
     }
   }
 
@@ -144,6 +151,5 @@ angular.module('myApp.directives', [])
       userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
     }
   });
-
 }
 });
