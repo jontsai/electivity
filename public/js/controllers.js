@@ -27,6 +27,17 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         angularFire(ref, $scope, "survey");
     })
     .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
+        $scope.items = [];
+        var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
+        ref.once('value' function(value) {
+            var location = value.val().location;
+            var query = value.val().query;
+            $http.get('/api/0/local/'+location+'/'+query).success(
+                function(result) {
+                  $scope.items = result;
+            });
+        })
+        
         $scope.item = {
             value: Math.random()
         };
@@ -35,8 +46,8 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         $scope.limit = 3;
 
         $scope.$watch('finished', function (newValue) {
-        	console.log('updated to' + newValue);
         	if (newValue === true) {
+                console.log('finished has been set to true')
         		$location.path('/survey/' + $scope.surveyId + '/results');
         	}
         })
