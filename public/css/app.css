@@ -194,6 +194,8 @@ body {
 }
 #results_screen .leaderboard ul li.leaderboard-result.first-place {
   background-color: #c0392b;
+  font-weight: bold;
+
 }
 #results_screen .leaderboard ul li.leaderboard-result.second-place {
   /*background-color: @second-place-red;*/
@@ -304,6 +306,10 @@ moment */
   /*        background-*/
 
 }
+.right {
+  float: right;
+}
+
 .facebook-button {
   color: #ffffff;
   -webkit-border-radius: 5px;
