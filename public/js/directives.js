@@ -26,4 +26,8 @@ angular.module('myApp.directives', [])
   })
   .directive('leaderboard', function() {
 
+
+  })  
+  .directive('timer', function() {
+
   });
