@@ -7,10 +7,8 @@ exports.yes = function(req, res) {
 	activityRef = fb.child(survey_id+"/activities/"+activity_id);
 	activityRef.once('value', function(snapshot) {
 	  if(snapshot.val() === null) {
-	    console.log('adding new value');
 	    activityRef.setWithPriority({ activity_id: activity_id, score: 1}, 9999)
 	  } else {
-	  	console.log('incrementing value');
 	    activityRef.setWithPriority({ activity_id: activity_id, score: snapshot.val().score + 1}, 9999);
 	  }
 	  res.json({status: 'done'});
