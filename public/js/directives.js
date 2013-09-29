@@ -8,22 +8,6 @@ angular.module('myApp.directives', [])
 	      elm.text(version);
 	    };
 	  })
-  .directive('swiper', function() {
-	  	return function(scope, elem) {
-	  		console.log('adding swipe');
-	  		console.log(elem);
-	  		console.log(elem[0]);
-		    window.mySwipe = Swipe(elem[0], {
-		      startSlide: 4,
-		      //auto: 3000,
-		      continuous: true,
-		      disableScroll: true,
-		      stopPropagation: true,
-		      callback: function(index, element) {},
-		      transitionEnd: function(index, element) {}
-		    });
-	  	};
-  })
   .directive('leaderboard', function() {
 
   });
