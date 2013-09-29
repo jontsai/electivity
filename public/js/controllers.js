@@ -108,4 +108,5 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
     })
     .controller('ResultsController', function($scope) {
         console.log('show result');
-    });
+    })
+   ;

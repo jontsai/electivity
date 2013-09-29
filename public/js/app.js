@@ -25,13 +25,9 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl:'/templates/vote-screen',
       controller: 'VoteController'
     }).
-    when('/survey/:type/:id/results',{
+    when('/results',{ ///survey/:type/:id/results
       templateUrl:'/templates/results-screen',
       controller: 'ResultsController'
-    }).
-    when('/leaderboard',{
-      templateUrl:'templates/leaderboard',
-      //controller: 'LeaderboardController'
     }).
     otherwise({
       redirectTo: '/'

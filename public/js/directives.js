@@ -26,37 +26,6 @@ angular.module('myApp.directives', [])
 		}
 	};
 })
-// <<<<<<< HEAD
-// .directive('leaderboard', function() {
-// 	return function(){console.log('hi leader');}
-// 	.directive('appVersion', function (version) {
-// 	    return function(scope, elm, attrs) {
-// 	      elm.text(version);
-// 	    };
-// 	  })
-// })  
-// .directive('timer', function() {
-// 	return function(scope){ return function countdown(remaining) {
-//     if(remaining <= 0){
-//         document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP! TO THE LEADRBARD'
-//     	setTimeout(function(){
-//     		//forward to leaderbord
-//     		//HAve var here that sets to true. Then Controller watches for true.
-
-//     	},1000);
-//     	return true;
-//     }
-//     document.getElementsByClassName('timer')[0].innerHTML = remaining;
-//     setTimeout(function(){ countdown(remaining - 1); }, 1000);
-// }(5);}
-// 	// return function(){
-// 	// 	console.log('hi timer');
-// 	// 	var test2 = new Countdown( { style: "flip", time: 3600 } );
-// 	// 	function countdownComplete(){
-// 	// 		alert("yo");
-// 	// 	}
-// 	// }
-// =======
 .directive('locationLookup', function() {
   	return function(scope, element, attrs) {
     	var autocomplete = new google.maps.places.Autocomplete(element[0]);
@@ -101,4 +70,80 @@ angular.module('myApp.directives', [])
           scope.form.geoinfo = formatGeoInfo(place);
     	});
   	}
+  })
+.directive('leaderboard', function() {
+  return function(scope, element, attrs) {
+   var LEADERBOARD_SIZE = 5;
+
+  // Create our Firebase reference
+  var scoreListRef = new Firebase('https://r4647oys5ai.firebaseio-demo.com//scoreList');
+//https://teamwinit.firebaseio.com//scoreList
+  // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
+  var htmlForPath = {};
+
+  // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
+  function handleScoreAdded(scoreSnapshot, prevScoreName) {
+    var newScoreRow = $("<tr/>");
+    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
+    newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
+
+    // Store a reference to the table row so we can get it again later.
+    htmlForPath[scoreSnapshot.name()] = newScoreRow;
+
+    // Insert the new score in the appropriate place in the table.
+    if (prevScoreName === null) {
+      $("#leaderboardTable").append(newScoreRow);
+    }
+    else {
+      var lowerScoreRow = htmlForPath[prevScoreName];
+      lowerScoreRow.before(newScoreRow);
+    }
+  }
+
+  // Helper function to handle a score object being removed; just removes the corresponding table row.
+  function handleScoreRemoved(scoreSnapshot) {
+    var removedScoreRow = htmlForPath[scoreSnapshot.name()];
+    removedScoreRow.remove();
+    delete htmlForPath[scoreSnapshot.name()];
+  }
+
+  // Create a view to only receive callbacks for the last LEADERBOARD_SIZE scores
+  var scoreListView = scoreListRef.limit(LEADERBOARD_SIZE);
+
+  // Add a callback to handle when a new score is added.
+  scoreListView.on('child_added', function (newScoreSnapshot, prevScoreName) {
+    handleScoreAdded(newScoreSnapshot, prevScoreName);
   });
+
+  // Add a callback to handle when a score is removed
+  scoreListView.on('child_removed', function (oldScoreSnapshot) {
+    handleScoreRemoved(oldScoreSnapshot);
+  });
+
+  // Add a callback to handle when a score changes or moves positions.
+  var changedCallback = function (scoreSnapshot, prevScoreName) {
+    handleScoreRemoved(scoreSnapshot);
+    handleScoreAdded(scoreSnapshot, prevScoreName);
+  };
+  scoreListView.on('child_moved', changedCallback);
+  scoreListView.on('child_changed', changedCallback);
+
+  // When the user presses enter on scoreInput, add the score, and update the highest score.
+  $("#scoreInput").keypress(function (e) {
+    if (e.keyCode == 13) {
+      var newScore = Number($("#scoreInput").val());
+      var name = $("#nameInput").val();
+      $("#scoreInput").val("");
+
+      if (name.length === 0)
+        return;
+
+      var userScoreRef = scoreListRef.child(name);
+      
+      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
+      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
+    }
+  });
+
+}
+});
