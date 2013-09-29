@@ -6,7 +6,11 @@
       </timer>
       -->
   <div rn-carousel-infinite rn-carousel-current="item" rn-carousel-next="vote()" rn-carousel-prev="next()" class="basic">
-    <h3 class="title" ng-bind="item.name"></h3>
-    <span ng-repeat="category in item.categories">{{category}}</span>
+    <div class="item-container">
+      <div class="item">
+        <h3 class="title" ng-bind="item.name"></h3>
+        <span ng-repeat="category in item.categories">{{category}}</span>
+        <p>5/10 &#xb7; {{ item.distance }} miles</p>
+      </div>
   </div>
 </div>

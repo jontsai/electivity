@@ -71,11 +71,16 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         };
 
         $scope.next = function(item) {
+            /*
             $scope.index -= 1;
             console.log($scope.index);
+            */
             var deferred = $q.defer();
+            /*
             var item = $scope.items.shift();
             console.log(item.name);
+            */
+            var item = {};
             deferred.resolve(item);
             return deferred.promise;
         };
