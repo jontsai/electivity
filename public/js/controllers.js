@@ -21,8 +21,9 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
 		};
 	})
     .controller('ShareController', function($scope, $routeParams, angularFire) {
-        $scope.survey = { message: 'Waiting'};
-        var ref = new Firebase("https://teamwinit.firebaseio.com/survey/"+$routeParams.id);
+        $scope.survey = {};
+        $scope.route.id = $routeParams.id;
+        var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         angularFire(ref, $scope, "survey");
     })
     .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
