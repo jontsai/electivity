@@ -32,7 +32,6 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
     })
     .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location) {
         $scope.items = [];
-        $scope.item = { id : 'fake', name: 'Please wait...'}
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         ref.once('value', function(value) {
             var location = value.val().location;
@@ -40,9 +39,10 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
             $scope.limit = value.val().limit
             $http.get('/api/0/local/'+location+'/'+query + '/10').success(
                 function(result) {
-                  console.log(result);
                   $scope.items = result;
+                  console.log($scope.items);
                   $scope.item = $scope.items.shift();
+                  console.log($scope.items.length);
             });
         })
 
@@ -56,28 +56,26 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         });
         $scope.index = 0;
 
-        $scope.vote = function(item) {
+        $scope.like = function() {
             $scope.index += 1;
-            console.log($scope.index);
-            var deferred = $q.defer();
             $http.post('/api/0/survey/'+$routeParams.id+'/activity/' + $scope.item.id, item).success(
                 function(result) {
-                  console.log('Vote submitted');
+                    console.log('Vote submitted');
+                    if($scope.items.length === 0) {
+                        $location.path('/survey/' + $scope.surveyId + '/results');
+                    }
+                  var item = $scope.items.shift();
+                  $scope.item = item;
             });
-            var item = $scope.items.shift();
-            console.log(item.name);
-            deferred.resolve(item);
-            return deferred.promise;
         };
 
-        $scope.next = function(item) {
+        $scope.dislike = function(item) {
             $scope.index -= 1;
-            console.log($scope.index);
-            var deferred = $q.defer();
             var item = $scope.items.shift();
-            console.log(item.name);
-            deferred.resolve(item);
-            return deferred.promise;
+            if($scope.items.length === 0) {
+                $location.path('/survey/' + $scope.surveyId + '/results');
+            }
+            $scope.item = item;
         };
     })
     .controller('ResultsController', function($scope) {
