@@ -11,9 +11,12 @@ angular.module('myApp.controllers', ['angular-carousel']).
 	.controller('TypeController', function($scope,$http, $routeParams) {
 		$scope.type = $routeParams.type;
 	})
-	.controller('CreateController', function ($scope, $http) {
+	.controller('CreateController', function($scope, $http, $routeParams) {
 		console.log('Choose');
-		$scope.form = {type: 'Food', location: 'London, UK'};
+		console.log($routeParams.type);
+		$scope.type = $routeParams.type;
+    
+		// $scope.form = {type: 'Food', location: 'London, UK'};
 
 		$scope.createSurvey = function() {
 			$http.post('/api/0/survey', $scope.form).success(

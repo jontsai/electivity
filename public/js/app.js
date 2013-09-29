@@ -10,17 +10,15 @@ angular.module('myApp', [
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'templates/choose-screen',
+      templateUrl: '/templates/choose-screen',
       controller: 'IndexController'
     }).
-    when('/survey/:type',
-      {
-        templateUrl:'templates/create-survey',
-        controller: 'CreateController'
-      }
-    ).
+    when('/survey/:type', {
+      templateUrl: '/templates/create-survey',
+      controller: 'CreateController'
+    }).
     when('/select',{
-      templateUrl:'templates/activity_items',
+      templateUrl:'/templates/activity_items',
       controller: 'ItemsController'
     }).
     otherwise({
