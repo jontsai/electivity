@@ -88,7 +88,11 @@ body {
   font-family: Century Gothic, Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
-#choose_screen .choice {
+#choose_screen .choice-container {
+  margin: auto;
+  width: 370px;
+}
+#choose_screen .choice-container .choice {
   /*    .rounded-base(5px);*/
 
   /*    padding: 5px;*/
@@ -102,22 +106,26 @@ body {
   text-transform: uppercase;
   width: 50%;
 }
-#choose_screen .choice:hover {
+#choose_screen .choice-container .choice:hover {
   transition: 0.2s;
   /*zoom: 130%;*/
 
   cursor: pointer;
 }
-#choose_screen .choice:hover img {
+#choose_screen .choice-container .choice:hover img {
   margin-top: -5px;
   margin-bottom: 5px;
 }
-#choose_screen .choice img {
-  height: auto;
-  width: 50px;
+#choose_screen .choice-container .choice img {
+  height: 100px;
+  width: auto;
 }
-#choose_screen .choice p {
-  color: rgba(0, 0, 0, 0.8);
+#choose_screen .choice-container .choice .activity-label {
+  color: #ffffff;
+  font-size: 1.2em;
+}
+#create_screen .form-spacer {
+  height: 22px;
 }
 #share_screen .share-message {
   width: 340px;
@@ -193,9 +201,6 @@ body {
 }
 a {
   text-decoration: none !important;
-}
-#one {
-  margin-top: 50px;
 }
 .rn-carousel-container {
   height: 100%;

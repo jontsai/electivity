@@ -122,33 +122,44 @@ body{
 }
 
 #choose_screen {
-    .choice {
-        /*    .rounded-base(5px);*/
-        /*    padding: 5px;*/
-        /*    background-color: rgba(0, 0, 0, 0.3);*/
-        font-family: @font-century-gothic;
-        color:rgba(0,0,0,.8);
-        margin:0 auto;
-        text-align: center;
-        text-transform:uppercase;
-        width: 50%;
-        &:hover {
-            @displacement: 5px;
-            transition: 0.2s;
-            /*zoom: 130%;*/
-            cursor: pointer;
+    .choice-container {
+        margin: auto;
+        width: 370px;
+        .choice {
+            /*    .rounded-base(5px);*/
+            /*    padding: 5px;*/
+            /*    background-color: rgba(0, 0, 0, 0.3);*/
+            font-family: @font-century-gothic;
+            color:rgba(0,0,0,.8);
+            margin:0 auto;
+            text-align: center;
+            text-transform:uppercase;
+            width: 50%;
+            &:hover {
+                @displacement: 5px;
+                transition: 0.2s;
+                /*zoom: 130%;*/
+                cursor: pointer;
+                img {
+                    margin-top: -@displacement;
+                    margin-bottom: @displacement;
+                }
+            }
             img {
-                margin-top: -@displacement;
-                margin-bottom: @displacement;
+                height: 100px;
+                width: auto;
+            }
+            .activity-label {
+                color: @white;
+                font-size: 1.2em;
             }
         }
-        img {
-            height:auto;
-            width:50px;
-        }
-        p {
-            color: rgba(0,0,0,.8);
-        }
+    }
+}
+
+#create_screen {
+    .form-spacer {
+        height: 22px;
     }
 }
 
@@ -233,10 +244,6 @@ body{
 
 a {
     text-decoration: none !important;
-}
-
-#one {
-    margin-top:50px;
 }
 
 .rn-carousel-container {
