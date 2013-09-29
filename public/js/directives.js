@@ -8,7 +8,6 @@ angular.module('myApp.directives', [])
 	      elm.text(version);
 	    };
 	  })
-<<<<<<< HEAD
   .directive('swiper', function() {
 	  	return function(scope, elem) {
 	  		console.log('adding swipe');

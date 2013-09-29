@@ -41,12 +41,16 @@ function getLocalSearchResults(query, location) {
     var defer = when.defer();
     
     var yqlQuery = new YQL.exec(localQuery, function(response) {
-        var results = response.query.results.Result;
-//         for (var i=0; i < results.length; ++i) {
-//             var result = results[i];
-//             storeRestaurantResult(result);
-//         }
-        defer.resolve(results);
+        var results = response.query.results.Result,
+        formatted = [];
+        results.forEach(function(result) {
+            var item = {id: result.dd, name: result.Title, address: result.Address, city: result.City, distance: result.Distance, categories: []};
+            result.Categories.Category.forEach(function(category) {
+                item.categories.push(category.content);
+            });
+            formatted.push(item);
+        });
+        defer.resolve(formatted);
     }, {
         'query': query,
         'location': location
@@ -74,13 +78,3 @@ function handleLocalSearchSuccess(results) {
 function handleLocalSearchFailure() {
     // do nothing
 }
-
-
-// getLocalSearchResults('sushi', 'san francisco, ca').then(
-//     handleLocalSearchSuccess,
-//     handleLocalSearchFailure
-// );
-
-//getFlickrInterestingPhotos();
-
-//process.exit(code=0);
