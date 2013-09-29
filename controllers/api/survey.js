@@ -3,13 +3,16 @@ var Firebase = require('firebase'),
 
 exports.increment = function(req, res) {
 	var activity_id = req.params.activity_id,
-	    survey_id = req.params.survey_id;
+	    survey_id = req.params.survey_id,
+	    activity = req.body;
 	activityRef = fb.child(survey_id+"/activities/"+activity_id);
 	activityRef.once('value', function(snapshot) {
 		if(snapshot.val() === null) {
-			activityRef.setWithPriority({ activity_id: activity_id, score: 1}, 9999)
+			activity.score = 1;
+			activityRef.setWithPriority(activity, 9999)
 		} else {
-			activityRef.setWithPriority({ activity_id: activity_id, score: snapshot.val().score + 1}, 9999);
+			activity.score = snapshot.val().score + 1;
+			activityRef.setWithPriority(activity, 9999);
 		}
 		res.json({status: 'done'});
 	});
