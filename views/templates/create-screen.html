@@ -1,18 +1,22 @@
-<form>
-	<input type="hidden" ng-model="form.type">
-	<label for="message">Message</label>
-	<input name="message" type="text" ng-model="form.message">
-	<label for="filter">Filter</label>
-	<input name="filter" type="text" ng-model="form.query" placeholder="Sushi">
-	<label for="location">Location</label>
-	<input type="text" name="location" location-lookup ng-model="form.location">
-	<label for="limit">Time Limit</label>
-	<select name="limit" ng-model="form.limit">
-		<option>10</option>
-		<option>15</option>
-		<option>20</option>
-		<option>25</option>
-		<option>30</option>
-	</select>
-	<button ng-click="createSurvey()">
-</form>
+<div id="create_screen" class="app-screen">
+  <h1 class="title">What are you thinking of?</h1>
+
+  <form class="pure-form pure-form-stacked create-form">
+    <input type="hidden" ng-model="form.type">
+    <input class="pure-u-1" name="message" type="text" ng-model="form.message" placeholder="Message: e.g. Where do you want to go tonight?">
+    <input class="pure-u-1" name="filter" type="text" ng-model="form.query"
+           placeholder="Filter: e.g. Sushi">
+    <input class="pure-u-1" id="location" type="text" name="location" location-lookup ng-model="form.location" placeholder="Enter a Location">
+    <div>
+      <select class="pure-u-1" id="limit" name="limit" ng-model="form.limit">
+        <option value="--">Time Limit</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option selected="selected" value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+      </select>
+    </div>
+    <button id="submit" ng-click="createSurvey()" class="pure-button">Create Survey</button>
+  </form>
+</div>
