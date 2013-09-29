@@ -9,16 +9,17 @@ var _fbRestaurants = _fb.child('restaurants');
 var _fbWeather = _fb.child('weather');
 var _fbFlickr = _fb.child('flickr');
 
-var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
-var weatherQuery = 'SELECT * FROM weather.forecast(0,30) WHERE (location = @location)';
-var flickrQuery = 'SELECT * FROM flickr.photos.search(0,30) WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
+var localQuery = 'SELECT * FROM local.search(0,@limit) WHERE (query=@query) AND (location=@location)';
+var weatherQuery = 'SELECT * FROM weather.forecast(0,@limit) WHERE (location = @location)';
+var flickrQuery = 'SELECT * FROM flickr.photos.search(0,@limit) WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
 
-function getFlickrInterestingPhotos(query, location) {
+function getFlickrInterestingPhotos(query, location, limit) {
     var defer = when.defer();
     var yqlQuery = new YQL.exec(flickrQuery, function(response) {
         var results = response.query.results;
         defer.resolve(results);
     }, {
+        'limit' : limit,
         'has_geo': true,
         'text' : query + ' ' + location,
         'api_key': FLICKR_API_KEY,
@@ -39,7 +40,7 @@ function getWeather(location) {
     });
 }
 
-function getLocalSearchResults(query, location) {
+function getLocalSearchResults(query, location, limit) {
     console.log(query);
     console.log(location);
     var defer = when.defer();
@@ -56,6 +57,7 @@ function getLocalSearchResults(query, location) {
         });
         defer.resolve(formatted);
     }, {
+        'limit': limit,
         'query': query,
         'location': location
     });
@@ -65,8 +67,8 @@ exports.getLocalSearchResults = getLocalSearchResults;
 
 exports.collection = function(request, response) {
     var deferreds = [];
-    deferreds.push(getLocalSearchResults(request.params.query, request.params.location));
-    deferreds.push(getFlickrInterestingPhotos(request.params.query, request.params.location))
+    deferreds.push(getLocalSearchResults(request.params.query, request.params.location, request.params.limit));
+    deferreds.push(getFlickrInterestingPhotos(request.params.query, request.params.location, request.params.limit))
     
     when.all(deferreds).then(
         function(results) {

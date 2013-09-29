@@ -15,38 +15,36 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
             type: $routeParams.type,
             limit: 20,
         };
-	$scope.createSurvey = function() {
-	    $http.post('/api/0/survey', $scope.form).success(
-		function(result) {
-		    $scope.id = result.id;
-		    $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
-		});
-	};
+    	$scope.createSurvey = function() {
+    	    $http.post('/api/0/survey', $scope.form).success(
+    		function(result) {
+    		    $scope.id = result.id;
+    		    $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
+    		});
+    	};
     })
-    .controller('ShareController', function($scope, $routeParams, angularFire) {
+    .controller('ShareController', function($scope, $http, $routeParams, angularFire) {
+        console.log($routeParams);
+        $scope.id = $routeParams.id;
         $scope.survey = {};
-        $scope.route.id = $routeParams.id;
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         angularFire(ref, $scope, "survey");
     })
-    .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
+    .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location) {
         $scope.items = [];
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         ref.once('value', function(value) {
             var location = value.val().location;
             var query = value.val().query;
-            $http.get('/api/0/local/'+location+'/'+query).success(
+            $scope.limit = value.val().limit
+            $http.get('/api/0/local/'+location+'/'+query + '/10').success(
                 function(result) {
                   $scope.items = result;
+                  $scope.item = $scope.items.shift();
             });
         })
-        
-        $scope.item = {
-            value: Math.random()
-        };
 
         $scope.finished = false;
-        $scope.limit = 3;
 
         $scope.$watch('finished', function (newValue) {
         	if (newValue === true) {
@@ -55,23 +53,9 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         	}
         })
 
-        $scope.next = function(item) {
+        $scope.next = function() {
             var deferred = $q.defer();
-            var item = {
-                value: Math.random()
-            };
-            deferred.resolve(item);
-
-            return deferred.promise;
-        };
-
-        $scope.prev = function(item) {
-            var deferred = $q.defer();
-            var item = {
-                value: Math.random()
-            };
-            deferred.resolve(item);
-
+            deferred.resolve($scope.items.shift());
             return deferred.promise;
         };
     })
