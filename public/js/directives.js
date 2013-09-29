@@ -33,14 +33,18 @@ angular.module('myApp.directives', [])
 	  })
 })  
 .directive('timer', function() {
-	return (function countdown(remaining) {
+	return function(){ return function countdown(remaining) {
     if(remaining <= 0){
-        document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP!'
+        document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP! TO THE LEADRBARD'
+    	setTimeout(function(){
+    		//forward to leaderbord
+
+    	},1000);
     	return true;
     }
     document.getElementsByClassName('timer')[0].innerHTML = remaining;
     setTimeout(function(){ countdown(remaining - 1); }, 1000);
-})(5);
+}(5);}
 	// return function(){
 	// 	console.log('hi timer');
 	// 	var test2 = new Countdown( { style: "flip", time: 3600 } );
