@@ -33,7 +33,7 @@ angular.module('myApp.controllers', ['firebase']).
         console.log('Create something');
         $scope.form = {
             type: $routeParams.type,
-            limit: 20,
+            limit: 10,
         };
     	$scope.createSurvey = function() {
     	    $http.post('/api/0/survey', $scope.form).success(
