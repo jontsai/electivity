@@ -2,82 +2,83 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['angular-carousel']).
-	controller('AppController', function($scope, $rootScope, $http) {
-	$scope.surveyId = undefined;
-	})
-	.controller('IndexController', function($scope,$http, $routeParams) {
-	})
-	.controller('TypeController', function($scope,$http, $routeParams) {
-		$scope.type = $routeParams.type;
-	})
-	.controller('CreateController', function ($scope, $http) {
-		console.log('Choose');
-		$scope.form = {type: 'Food', location: 'London, UK'};
+angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
+    controller('AppController', function($scope, $rootScope, $http, $routeParams, $location) {
 
-		$scope.createSurvey = function() {
-			$http.post('/api/0/survey', $scope.form).success(
-		        function(result) {
-		          $scope.surveyId = result.id;
-		          $location.path('/survey/'+ $scope.surveyId);
-		    });
-		};
-	}).
-  	controller('ItemsController', function ($scope, $http, $q, $timeout) {
-		console.log('Swipe like mad');
-    $scope.timesUp=false;
-    $scope.$watch('timesUp',function(){
-      //redirect to leaderboard
-      //$location.path('')
-      console.log('hi almost to leaderboard')
+	// 	$scope.createSurvey = function() {
+	// 		$http.post('/api/0/survey', $scope.form).success(
+	// 	        function(result) {
+	// 	          $scope.surveyId = result.id;
+	// 	          $location.path('/survey/'+ $scope.surveyId);
+	// 	    });
+	// 	};
+	// }).
+ //  	controller('ItemsController', function ($scope, $http, $q, $timeout) {
+	// 	console.log('Swipe like mad');
+ //    $scope.timesUp=false;
+ //    $scope.$watch('timesUp',function(){
+ //      //redirect to leaderboard
+ //      //$location.path('')
+ //      console.log('hi almost to leaderboard')
+ //    })
+	// 	// infinite carousel stuff
+	// 	var currentDay = (new Date()),
+	// 	    colors = ['#339966', '#336699', '#cc9933', '#cc6633', '#cc3366', '#66cc33'],
+	// 	    colorIndex = 0;
     })
-		// infinite carousel stuff
-		var currentDay = (new Date()),
-		    colors = ['#339966', '#336699', '#cc9933', '#cc6633', '#cc3366', '#66cc33'],
-		    colorIndex = 0;
+    .controller('ChooseController', function() {
+        console.log('Choose an activity');
+    })
+    .controller('CreateController', function($scope, $http, $routeParams, $location) {
+        console.log('Create something');
+        $scope.form = {
+            type: $routeParams.type,
+            limit: 20,
+        };
+    	$scope.createSurvey = function() {
+    	    $http.post('/api/0/survey', $scope.form).success(
+    		function(result) {
+    		    $scope.id = result.id;
+    		    $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
+    		});
+    	};
+    })
+    .controller('ShareController', function($scope, $http, $routeParams, angularFire) {
+        console.log($routeParams);
+        $scope.id = $routeParams.id;
+        $scope.survey = {};
+        var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
+        angularFire(ref, $scope, "survey");
+    })
+    .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location) {
+        $scope.items = [];
+        var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
+        ref.once('value', function(value) {
+            var location = value.val().location;
+            var query = value.val().query;
+            $scope.limit = value.val().limit
+            $http.get('/api/0/local/'+location+'/'+query + '/10').success(
+                function(result) {
+                  $scope.items = result;
+                  $scope.item = $scope.items.shift();
+            });
+        })
 
-		function getColor() {
-		  return colors[colorIndex++ % colors.length];
-		}
+        $scope.finished = false;
 
-		function addPage() {
-			console.log('addPage');
-		  // generate a single page, with color and a new date
-		  currentDay = new Date(currentDay.getTime() + 86400000);
-		  return {
-		    bg: getColor(),
-		    date: currentDay
-		  };
-		  
-		}
+        $scope.$watch('finished', function (newValue) {
+        	if (newValue === true) {
+                console.log('finished has been set to true')
+        		$location.path('/survey/' + $scope.surveyId + '/results');
+        	}
+        })
 
-		$scope.page = addPage();
-
-		$scope.getSlide = function(item, direction) {
-			console.log('swiped');
-			// generate a new slide
-			var nextDate = new Date();
-			nextDate.setTime(item.date.getTime() + (direction*86400000));
-			var item = {
-				bg: getColor(),
-				date: nextDate
-			};
-
-			//return item;
-
-			// sample promise
-			var defer = $q.defer();
-
-			$timeout(function() {
-			  defer.resolve(item);
-			}, 10);
-			return defer;
-		};
-
-		$scope.increment = function(activity) {
-			$http.post('/api/0/survey/'+ $scope.surveyId + '/', null).success(
-		        function(result) {
-		          console.log(result);
-		    });
-		}
-  	});
+        $scope.next = function() {
+            var deferred = $q.defer();
+            deferred.resolve($scope.items.shift());
+            return deferred.promise;
+        };
+    })
+    .controller('ResultsController', function($scope) {
+        console.log('show result');
+    });

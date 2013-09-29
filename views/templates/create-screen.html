@@ -1,0 +1,22 @@
+<div id="create_screen" class="app-screen">
+  <h1 class="title">What are you thinking of?</h1>
+
+  <form class="pure-form pure-form-stacked create-form">
+    <input type="hidden" ng-model="form.type">
+    <input class="pure-u-1" name="message" type="text" ng-model="form.message" placeholder="Message: e.g. Where do you want to go tonight?">
+    <input class="pure-u-1" name="filter" type="text" ng-model="form.query"
+           placeholder="Filter: e.g. Sushi">
+    <input class="pure-u-1" id="location" type="text" name="location" location-lookup ng-model="form.location" placeholder="Enter a Location">
+    <div>
+      <select class="pure-u-1" id="limit" name="limit" ng-model="form.limit">
+        <option value="--">Time Limit</option>
+        <option value="10">10 seconds</option>
+        <option value="15">15 seconds</option>
+        <option selected="selected" value="20">20 seconds</option>
+        <option value="25">25 seconds</option>
+        <option value="30">30 seconds</option>
+      </select>
+    </div>
+    <button id="submit" ng-click="createSurvey()" class="pure-button primary-action-button">Create Survey</button>
+  </form>
+</div>

@@ -54,11 +54,14 @@ if (app.get('env') === 'production') {
  */
 // serve index and view partials
 app.get('/', routes.index);
-app.get('/templates/:name', routes.templates);
-app.get('/templates/:directory/:name', routes.subtemplates);
+
 app.post('/api/0/survey/:survey_id/activity/:activity_id', survey.increment);
 app.post('/api/0/survey', survey.create);
-app.get('/localsearch/:location/:query', local.collection);
+app.get('/api/0/local/:location/:query/:limit', local.collection);
+
+
+app.get('/templates/:name', routes.templates);
+app.get('/templates/:directory/:name', routes.subtemplates);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

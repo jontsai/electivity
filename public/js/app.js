@@ -2,26 +2,32 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
-  'myApp.services',
-  'myApp.controllers',
-  'myApp.filters',
-  'myApp.directives'
+    'myApp.services',
+    'myApp.controllers',
+    'myApp.filters',
+    'myApp.directives'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'templates/choose-screen',
-      controller: 'IndexController'
+      templateUrl: '/templates/choose-screen',
+      controller: 'ChooseController'
     }).
-    when('/survey/:type',
-      {
-        templateUrl:'templates/create-survey',
-        controller: 'CreateController'
-      }
-    ).
-    when('/select',{
-      templateUrl:'templates/activity_items',
-      controller: 'ItemsController'
+    when('/survey/:type', {
+      templateUrl: '/templates/create-screen',
+      controller: 'CreateController'
+    }).
+    when('/survey/:type/:id/share', {
+      templateUrl: '/templates/share-screen',
+      controller: 'ShareController'
+    }).
+    when('/survey/:type/:id/vote',{
+      templateUrl:'/templates/vote-screen',
+      controller: 'VoteController'
+    }).
+    when('/survey/:type/:id/results',{
+      templateUrl:'/templates/results-screen',
+      controller: 'ResultsController'
     }).
     when('/leaderboard',{
       templateUrl:'templates/leaderboard',

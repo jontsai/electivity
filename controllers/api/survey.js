@@ -17,9 +17,12 @@ exports.increment = function(req, res) {
 
 exports.create = function(req, res) {
 	var type = req.body.type, 
-	location = req.body.location;
+	query = req.body.query,
+	message = req.body.message,
+	location = req.body.location,
+	limit = req.body.limit;
 
 	var ref = fb.push();
-	ref.set({type: type, location: location});
+	ref.set({type: type, message: message, query: query, location: location, limit: limit});
 	res.json({ id: ref.name() });
 };

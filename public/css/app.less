@@ -1,0 +1,249 @@
+@import "_imports/vars.less";
+@import "_imports/colors.less";
+
+.rounded-base(@border-radius) {
+    -webkit-border-radius: (@border-radius); /* Safari prototype */
+    -moz-border-radius: (@border-radius); /* Gecko browsers */
+    border-radius: (@border-radius); /* Everything else - limited support at the 
+moment */
+}
+
+.placeholder-color(@color) {
+    &::-webkit-input-placeholder {
+        color: @color;
+    }
+    &:-moz-placeholder {
+        color: @color;
+    }
+    &::-moz-placeholder {
+        color: @color;
+    }
+    &:-ms-input-placeholder {
+        color: @color;
+    }
+}
+
+ul {
+    li {
+        list-style-type: none
+    }
+    &.basic {
+        width:100%;
+        height:100%;
+        li {
+            text-align:center;
+            padding-top:80px;
+            font-size: 22px;
+        }
+    }
+}
+
+/* app css stylesheet */
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+
+/*
+hover over icon and it jumps up like tumblr
+*/
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    *zoom:1;
+}
+
+/*
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+*/
+
+html {height:100%;}
+
+body{
+    height:100%;
+    min-height:100%;
+    background-size: 100% auto;
+    background: url("../img/background.png") no-repeat bottom center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: @font-century-gothic;
+}
+
+#master{
+    height:400px;
+    width:50%;
+    margin: 0 auto;
+}
+
+#header{
+    background:url("../img/logo.png") no-repeat center center;
+    height:192px;
+    background-size:70px auto;
+}
+
+.shadow {
+    -moz-box-shadow: 5px 5px 5px @shadow-color;
+    -webkit-box-shadow: 5px 5px 5px @shadow-color;
+    box-shadow: 5px 5px 5px @shadow-color;
+}
+
+.border {
+  border: 1px solid @border-color;
+}
+
+.background {
+  background-color: rgba(0,0,0,0.5);
+  color: @white;
+}
+
+.app-screen {
+    margin: auto;
+    text-align: center;
+    color: @white;
+
+    h1.title {
+        font-size: 2.3em;
+        text-shadow: 0 0 3px rgba(0,0,0, 0.4);
+        margin-top: 0px;
+        margin-bottom: 55px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: @font-century-gothic;
+        font-weight: 300;
+    }
+}
+
+#choose_screen {
+}
+
+#share_screen {
+    .share-message {
+        width: 340px;
+        margin: auto;
+        margin-bottom: 36px;
+        .label {
+            font-weight: 500;
+            font-size: 1.33em;
+        }
+        .details {
+            font-weight: 300;
+            font-size: 1.17em;
+        }
+    }
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.choice {
+/*    .rounded-base(5px);*/
+/*    padding: 5px;*/
+/*    background-color: rgba(0, 0, 0, 0.3);*/
+    font-family: @font-century-gothic;
+    color:rgba(0,0,0,.8);
+    margin:0 auto;
+    text-align: center;
+    text-transform:uppercase;
+    width: 50%;
+    &:hover {
+        @displacement: 5px;
+        transition: 0.2s;
+        /*zoom: 130%;*/
+        cursor: pointer;
+        img {
+            margin-top: -@displacement;
+            margin-bottom: @displacement;
+        }
+    }
+    img {
+        height:auto;
+        width:50px;
+    }
+    p {
+        color: rgba(0,0,0,.8);
+    }
+}
+
+#one {
+    margin-top:50px;
+}
+
+.rn-carousel-container {
+    height:100%;
+}
+
+#create_screen {
+    .create-form {
+        width: 400px;
+        margin: auto;
+    }
+    .pure-form {
+        .widget-base() {
+            margin: 10px auto;
+            display: block;
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.1);
+            border: 1px solid rgba(0,0,0,0.2);
+            font-weight: bold;
+            line-height: 2em;
+            font-size: 1em;
+            color: @black;
+            font-family: @font-century-gothic;
+            .placeholder-color(@dark-gray);
+        }
+        input, .pure-input-rounded {
+            .widget-base();
+        }
+        select {
+            .widget-base();
+            height: 28px;
+            width: 100%;
+            /*-webkit-appearance: none;*/
+        }
+
+        #search {
+            margin:0 auto;
+            text-align: center;
+            h2 {
+                font-family: @font-century-gothic;
+                text-align: center;
+                font-size:3em;
+            }
+        }
+    }
+}
+
+.social-button-base() {
+    color: @white;
+    .rounded-base(5px);
+    font-family: @font-century-gothic;
+}
+
+.primary-action-button {
+    .social-button-base();
+    background-color: @emerald;
+    border: 1px solid @nephritis;
+    font-size: 1.3em;
+    &:hover {
+/*        background-*/
+    }
+}
+
+.facebook-button {
+    .social-button-base();
+    background-color: @facebook-blue;
+}
+
+.twitter-button {
+    .social-button-base();
+    background-color: @twitter-blue;
+}

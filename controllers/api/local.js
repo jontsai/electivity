@@ -9,19 +9,24 @@ var _fbRestaurants = _fb.child('restaurants');
 var _fbWeather = _fb.child('weather');
 var _fbFlickr = _fb.child('flickr');
 
-var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
-//var localQuery='select * from local.search where query="sushi" and location="san francisco, ca"';
-var weatherQuery = 'SELECT * FROM weather.forecast WHERE (location = @location)';
-var flickrQuery = 'SELECT * FROM flickr.photos.interestingness(20) AND (api_key=@api_key)';
+var localQuery = 'SELECT * FROM local.search(0,@limit) WHERE (query=@query) AND (location=@location)';
+var weatherQuery = 'SELECT * FROM weather.forecast(0,@limit) WHERE (location = @location)';
+var flickrQuery = 'SELECT * FROM flickr.photos.search(0,@limit) WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
 
-function getFlickrInterestingPhotos() {
+function getFlickrInterestingPhotos(query, location, limit) {
+    var defer = when.defer();
     var yqlQuery = new YQL.exec(flickrQuery, function(response) {
-//        console.log(response);
-        //var results = response.query.results;
-        //_fbFlickr.push(results);
+        var results = response.query.results;
+        defer.resolve(results);
     }, {
-        'api_key' : FLICKR_API_KEY
+        'limit' : limit,
+        'has_geo': true,
+        'text' : query + ' ' + location,
+        'api_key': FLICKR_API_KEY,
+        'sort': 'interestingness.desc'
     });
+
+    return defer.promise;
 }
 
 function getWeather(location) {
@@ -35,7 +40,7 @@ function getWeather(location) {
     });
 }
 
-function getLocalSearchResults(query, location) {
+function getLocalSearchResults(query, location, limit) {
     console.log(query);
     console.log(location);
     var defer = when.defer();
@@ -52,6 +57,7 @@ function getLocalSearchResults(query, location) {
         });
         defer.resolve(formatted);
     }, {
+        'limit': limit,
         'query': query,
         'location': location
     });
@@ -60,9 +66,27 @@ function getLocalSearchResults(query, location) {
 exports.getLocalSearchResults = getLocalSearchResults;
 
 exports.collection = function(request, response) {
-    getLocalSearchResults(request.params.query, request.params.location).then(
+    var deferreds = [];
+    deferreds.push(getLocalSearchResults(request.params.query, request.params.location, request.params.limit));
+    deferreds.push(getFlickrInterestingPhotos(request.params.query, request.params.location, request.params.limit))
+    
+    when.all(deferreds).then(
         function(results) {
-            response.json(results);
+            var output = results[0], i = 0;
+            // console.log(results[1].photo.length);
+            // results[1].photo.forEach(function(image) {
+            //     if(typeof image.farm !== undefined 
+            //         && typeof image.server !== undefined 
+            //         && typeof image.id !== undefined 
+            //         && typeof image.secret !== undefined) 
+            //     {
+            //         output[i++].image = 'http://farm' + image.farm + '.staticflickr.com/' + image.server + '/' + image.id + '_'+ image.secret + '_o.jpg';
+            //         console.log('boom');
+            //     } else {
+            //         console.log(image);
+            //     }
+            // });
+            response.json(output);
         }
     );
 }
