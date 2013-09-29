@@ -23,4 +23,5 @@ angular.module('myApp.controllers', []).
     //   transitionEnd: function(index, element) {}
     // });
     // $scope.msg="Yahoo Hackinz"
+
   });
