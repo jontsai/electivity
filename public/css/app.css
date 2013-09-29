@@ -27,128 +27,9 @@ hover over icon and it jumps up like tumblr
 .cf {
   *zoom: 1;
 }
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  margin: 0;
-  padding: 0;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+/*
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+*/
 html {
   height: 100%;
 }
@@ -184,19 +65,27 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
 }
+.app-screen {
+  margin: auto;
+  text-align: center;
+}
+.app-screen h1.title {
+  font-family: Century Gothic, arial, sans-serif;
+  font-weight: 300;
+  font-size: 2.3em;
+  color: #ffffff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+a {
+  text-decoration: none !important;
+}
 .choice {
-  -webkit-border-radius: 5px;
-  /* Safari prototype */
+  /*    .rounded-base(5px);*/
 
-  -moz-border-radius: 5px;
-  /* Gecko browsers */
+  /*    padding: 5px;*/
 
-  border-radius: 5px;
-  /* Everything else - limited support at the 
-moment */
+  /*    background-color: rgba(0, 0, 0, 0.3);*/
 
-  padding: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
   font-family: Century Gothic, arial, sans-serif;
   color: rgba(0, 0, 0, 0.8);
   margin: 0 auto;
@@ -205,20 +94,21 @@ moment */
   width: 50%;
 }
 .choice:hover {
-  zoom: 130%;
+  transition: 0.2s;
+  /*zoom: 130%;*/
+
   cursor: pointer;
+}
+.choice:hover img {
+  margin-top: -5px;
+  margin-bottom: 5px;
 }
 .choice img {
   height: auto;
   width: 50px;
 }
-.choice a {
-  text-decoration: none;
+.choice p {
   color: rgba(0, 0, 0, 0.8);
-}
-.choice a:hover {
-  color: rgba(0, 0, 0, 0.6);
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }
 #one {
   margin-top: 50px;
