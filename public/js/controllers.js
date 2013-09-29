@@ -53,12 +53,13 @@ angular.module('myApp.controllers', ['firebase']).
     .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location, angularFire) {
         $scope.items = [];
         $scope.limit = 10;
+        $scope.state = 0;
         $scope.survey = { id: $routeParams.id };
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         angularFire(ref, $scope, "survey");
 
         $scope.$watch('survey', function(survey) {
-            if(typeof survey.location !== 'undefined') {
+            if(typeof survey.location !== 'undefined' && $scope.state === 0) {
                 $http.get('/api/0/local/'+ survey.location +'/'+ survey.query + '/10').success(
                     function(result) {
                       $scope.items = result;
@@ -75,7 +76,6 @@ angular.module('myApp.controllers', ['firebase']).
         })
 
         $scope.like = function(item) {
-            console.log($scope.survey);
             $http.post('/api/0/survey/'+$scope.survey.id+'/activity/' + item.id, item).success(
                 function(result) {
                     console.log('Vote submitted');
