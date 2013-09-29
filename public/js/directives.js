@@ -146,4 +146,46 @@ angular.module('myApp.directives', [])
   });
 
 }
+}).
+directive('scrollview', function() {
+    return function(scope, element) {
+        YUI().use(
+            'scrollview',
+            "node-base", "node-event-delegate", "transition", "event-move",
+        function(Y) {
+            function initScrollView() {
+/*
+                var scrollView = new Y.ScrollView({
+                    id: 'scrollview',
+                    srcNode: '#scrollview-content',
+                    width: '300px',
+                    //height: '400px',
+                    flick: {
+                        minDistance:10,
+                        minVelocity:0.3,
+                        axis: "x"
+                    }
+                });
+
+                scrollView.render();
+
+                // Prevent default image drag behavior
+                scrollView.get("contentBox").delegate("mousedown", function(e) {
+                    e.preventDefault();
+                }, "img");
+*/
+                function handleItemClicked(e) {
+                    var target = e.currentTarget;
+                    var image = target.one('.candidate-image');
+                    var body = Y.one(document.body);
+                    var imgUrl = image.getAttribute('src');
+                    Y.log(imgUrl);
+                    body.setStyle('backgroundImage', 'url("' + imgUrl + '")');
+                }
+
+                Y.on('click', handleItemClicked, '#scrollview-content', '.candidate');
+            }
+            setTimeout(initScrollView, 1000);
+        });
+    }
 });

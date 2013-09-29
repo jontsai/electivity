@@ -140,6 +140,47 @@ body {
   font-weight: 300;
   font-size: 1.17em;
 }
+#vote_screen {
+  /* To layout horizontal LIs */
+
+}
+#vote_screen #main_list {
+  padding: 0;
+}
+#vote_screen ul {
+  padding: 0;
+}
+#vote_screen #scrollview-container {
+  margin: auto;
+  /*
+        width: 300px;
+        height: 400px;
+*/
+
+}
+#vote_screen #scrollview-content {
+  margin: auto;
+}
+#vote_screen .candidate ul {
+  display: block;
+}
+#vote_screen .candidate ul li {
+  display: block;
+}
+#vote_screen .candidate .candidate-image {
+  display: none;
+}
+#vote_screen #scrollview-content {
+  white-space: nowrap;
+}
+#vote_screen #scrollview-content li.candidate {
+  display: inline-block;
+  background-color: transparent;
+  /* For IE 6/7 - needs inline block hack (and the background color mentioned above) */
+
+  *display: inline;
+  *zoom: 1;
+}
 #vote_screen .voting-button-container {
   margin: auto;
   width: 300px;

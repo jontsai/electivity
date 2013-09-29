@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
+angular.module('myApp.controllers', ['firebase']).
     controller('AppController', function($scope, $rootScope, $http, $routeParams, $location) {
 
 	// 	$scope.createSurvey = function() {
@@ -71,11 +71,11 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
             $http.post('/api/0/survey/'+$scope.survey.id+'/activity/' + item.id, item).success(
                 function(result) {
                     console.log('Vote submitted');
-                    if($scope.items.length === 0) {
-                        $location.path('/survey/' + $scope.survey.id + '/results');
-                    }
-                  $scope.items.shift();
-            });
+                });
+            if($scope.items.length === 0) {
+                $location.path('/survey/' + $scope.survey.id + '/results');
+            }
+            $scope.items.shift();
         };
 
         $scope.dislike = function(item) {

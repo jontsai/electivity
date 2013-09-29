@@ -180,6 +180,50 @@ body{
 }
 
 #vote_screen {
+    #main_list {
+        padding: 0;
+    }
+    ul {
+        padding: 0;
+    }
+    #scrollview-container {
+        margin: auto;
+/*
+        width: 300px;
+        height: 400px;
+*/
+    }
+    #scrollview-content {
+        margin: auto;
+    }
+    .candidate-container {
+    }
+    .candidate {
+        ul {
+            display: block;
+            li {
+                display: block;
+            }
+        }
+        .candidate-image {
+            display: none;
+        }
+    }
+    /* To layout horizontal LIs */
+    #scrollview-content {
+        white-space:nowrap;
+        li.candidate {
+            display:inline-block;
+
+            background-color: transparent;
+
+            /* For IE 6/7 - needs inline block hack (and the background color mentioned above) */
+            *display:inline;
+            *zoom:1;
+        }
+
+    }
+
     .voting-button-container {
         margin: auto;
         width: 300px;
