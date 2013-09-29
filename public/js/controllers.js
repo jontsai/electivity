@@ -29,7 +29,7 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
     .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
         $scope.items = [];
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
-        ref.once('value' function(value) {
+        ref.once('value', function(value) {
             var location = value.val().location;
             var query = value.val().query;
             $http.get('/api/0/local/'+location+'/'+query).success(
