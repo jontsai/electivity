@@ -1,5 +1,6 @@
 var YQL = require('yql');
 var Firebase = require('firebase');
+var when = require('when');
 
 var FLICKR_API_KEY = 'eb45dbda9516ed5d46d7ba4d082626f0';
 
@@ -8,7 +9,7 @@ var _fbRestaurants = _fb.child('restaurants');
 var _fbWeather = _fb.child('weather');
 var _fbFlickr = _fb.child('flickr');
 
-var localQuery = 'SELECT * FROM local.search WHERE (query=@cuisine) AND (location=@location)';
+var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
 //var localQuery='select * from local.search where query="sushi" and location="san francisco, ca"';
 var weatherQuery = 'SELECT * FROM weather.forecast WHERE (location = @location)';
 var flickrQuery = 'SELECT * FROM flickr.photos.interestingness(20) AND (api_key=@api_key)';
@@ -34,24 +35,46 @@ function getWeather(location) {
     });
 }
 
-function getRestaurants(cuisine, location) {
+function getLocalSearchResults(query, location) {
+    console.log(query);
+    console.log(location);
+    var defer = when.defer();
+    
     var yqlQuery = new YQL.exec(localQuery, function(response) {
-        var results = response.query.results.Result;
-        for (var i=0; i < results.length; ++i) {
-            var result = results[i];
-            storeRestaurantResult(result);
-        }
+        var results = response.query.results.Result,
+        formatted = [];
+        results.forEach(function(result) {
+            var item = {id: result.dd, name: result.Title, address: result.Address, city: result.City, distance: result.Distance, categories: []};
+            result.Categories.Category.forEach(function(category) {
+                item.categories.push(category.content);
+            });
+            formatted.push(item);
+        });
+        defer.resolve(formatted);
     }, {
-       'cuisine': cuisine,
-       'location': location
+        'query': query,
+        'location': location
     });
+    return defer.promise;
+}
+exports.getLocalSearchResults = getLocalSearchResults;
+
+exports.collection = function(request, response) {
+    getLocalSearchResults(request.params.query, request.params.location).then(
+        function(results) {
+            response.json(results);
+        }
+    );
 }
 
 function storeRestaurantResult(result) {
-      _fbRestaurants.push(result);
+    _fbRestaurants.push(result);
 }
 
-getRestaurants('sushi', 'san francisco, ca');
-getFlickrInterestingPhotos();
+function handleLocalSearchSuccess(results) {
+    console.log(results);
+}
 
-//process.exit(code=0);
+function handleLocalSearchFailure() {
+    // do nothing
+}

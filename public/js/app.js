@@ -13,13 +13,15 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'templates/choose-screen',
       controller: 'IndexController'
     }).
+    when('/survey/:type',
+      {
+        templateUrl:'templates/create-survey',
+        controller: 'CreateController'
+      }
+    ).
     when('/select',{
       templateUrl:'templates/activity_items',
       controller: 'ItemsController'
-    }).
-    when('/select/item',{
-      templateUrl:'templates/activity_item',
-      controller: 'ItemController'
     }).
     otherwise({
       redirectTo: '/'

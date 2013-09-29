@@ -3,7 +3,8 @@
  */
 var express = require('express'),
   routes = require('./controllers/index'),
-  swipe = require('./controllers/api/survey'),
+  survey = require('./controllers/api/survey'),
+  local = require('./controllers/api/local'),
   http = require('http'),
   path = require('path'),
   hoganExpress = require('hogan-express');
@@ -55,8 +56,9 @@ if (app.get('env') === 'production') {
 app.get('/', routes.index);
 app.get('/templates/:name', routes.templates);
 app.get('/templates/:directory/:name', routes.subtemplates);
-app.post('/api/0/survey/:survey_id/activity/:activity_id', swipe.increment);
-app.post('/api/0/survey', swipe.create);
+app.post('/api/0/survey/:survey_id/activity/:activity_id', survey.increment);
+app.post('/api/0/survey', survey.create);
+app.get('/localsearch/:location/:query', local.collection);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

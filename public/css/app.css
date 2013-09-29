@@ -1,3 +1,15 @@
+ul li {
+  list-style-type: none
+}
+ul.basic {
+  width:100%;
+  height:100%;
+}
+ul.basic li {
+  text-align:center;
+  padding-top:80px;
+  font-size: 22px;
+}
 /* app css stylesheet */
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 
@@ -32,53 +44,19 @@ body{
   -o-background-size: cover;
   background-size: cover;
 }
+
 #master{
   height:400px;
   width:50%;
   margin: 0 auto;
 }
+
 #header{
   background:url("../img/logo.png") no-repeat center center;
   height:192px;
   background-size:70px auto;
 }
-.tripjoin-login_details {
-  color: white;
-  
-}
 
-.display {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
-
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -100px;
-}
-
-#push, footer {
-  height: 100px;
-}
-
-.navbar {
-  background-color: rgba(0,0,0,0.7);
-}
-
-.navbar-brand {
-  color: rgb(255,255,255);
-}
-
-.rounded {
-  -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
 
 .shadow {
   -moz-box-shadow: 5px 5px 5px #858585;
@@ -116,5 +94,8 @@ a {
 }
 a:hover{
   color:rgba(0,0,0,.6);
-  text-shadow:0 0 3px rgba(0,0,0,.4);
+  text-shadow:0 0 3px rgba(0,0,0,.4);}
+
+.rn-carousel-container {
+  height:100%;
 }
