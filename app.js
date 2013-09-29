@@ -3,7 +3,7 @@
  */
 var express = require('express'),
   routes = require('./controllers/index'),
-  messages = require('./controllers/api/messages'),
+  swipe = require('./controllers/api/swipe'),
   http = require('http'),
   path = require('path'),
   hoganExpress = require('hogan-express');
@@ -50,8 +50,7 @@ if (app.get('env') === 'production') {
 app.get('/', routes.index);
 app.get('/templates/:name', routes.templates);
 app.get('/templates/:directory/:name', routes.subtemplates);
-app.get('/api/0/messages', messages.collection);
-app.get('/api/0/messages/:id', messages.get);
+app.post('/api/0/survey/:survey_id/activity/:activity_id', swipe.yes);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

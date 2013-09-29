@@ -9,11 +9,11 @@ exports.index = function(req, res){
 
 exports.templates = function (req, res) {
   var name = req.params.name;
-  res.render('templates/' + name);
+  res.sendfile('views/templates/' + name + '.html');
 };
 
 exports.subtemplates = function (req, res) {
   var name = req.params.name;
   var directory = req.params.directory;
-  res.render('templates/' + directory + '/' + name);
+  res.sendfile('views/templates/' + directory + '/' + name + '.html');
 };
