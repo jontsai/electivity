@@ -30,33 +30,40 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         angularFire(ref, $scope, "survey");
     })
-    .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location) {
+    .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location, angularFire) {
         $scope.items = [];
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
-        ref.once('value', function(value) {
-            var location = value.val().location;
-            var query = value.val().query;
-            $scope.limit = value.val().limit
-            $http.get('/api/0/local/'+location+'/'+query + '/10').success(
+        angularFire(ref, $scope, "survey");
+
+        $scope.$watch('survey', function(survey) {
+            $http.get('/api/0/local/'+ survey.location +'/'+ survey.query + '/10').success(
                 function(result) {
                   $scope.items = result;
                   console.log($scope.items);
                   $scope.item = $scope.items.shift();
                   console.log($scope.items.length);
             });
-        })
-
-        $scope.finished = false;
-
-        $scope.$watch('finished', function (newValue) {
-        	if (newValue === true) {
-                console.log('finished has been set to true')
-        		$location.path('/survey/' + $scope.surveyId + '/results');
-        	}
         });
-        $scope.index = 0;
+        // ref.once('value', function(value) {
+        //     var location = value.val().location;
+        //     var query = value.val().query;
+        //     $scope.limit = value.val().limit
+        //     console.log('got response from firebase');
+        //     console.log('/api/0/local/'+location+'/'+query + '/10');
+        //     
+        // }.bind(this));
 
-        $scope.like = function() {
+        // $scope.finished = false;
+
+        // $scope.$watch('finished', function (newValue) {
+        // 	if (newValue === true) {
+        //         console.log('finished has been set to true')
+        // 		$location.path('/survey/' + $scope.surveyId + '/results');
+        // 	}
+        // });
+        // $scope.index = 0;
+
+        $scope.like = function(item) {
             $scope.index += 1;
             $http.post('/api/0/survey/'+$routeParams.id+'/activity/' + $scope.item.id, item).success(
                 function(result) {
