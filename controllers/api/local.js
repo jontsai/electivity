@@ -49,7 +49,7 @@ function getLocalSearchResults(query, location, limit) {
         var results = response.query.results.Result,
         formatted = [];
         results.forEach(function(result) {
-            var item = {id: result.dd, name: result.Title, address: result.Address, city: result.City, distance: result.Distance, categories: []};
+            var item = {id: result.id, name: result.Title, address: result.Address, city: result.City, distance: result.Distance, categories: []};
             result.Categories.Category.forEach(function(category) {
                 item.categories.push(category.content);
             });
@@ -73,19 +73,16 @@ exports.collection = function(request, response) {
     when.all(deferreds).then(
         function(results) {
             var output = results[0], i = 0;
-            // console.log(results[1].photo.length);
-            // results[1].photo.forEach(function(image) {
-            //     if(typeof image.farm !== undefined 
-            //         && typeof image.server !== undefined 
-            //         && typeof image.id !== undefined 
-            //         && typeof image.secret !== undefined) 
-            //     {
-            //         output[i++].image = 'http://farm' + image.farm + '.staticflickr.com/' + image.server + '/' + image.id + '_'+ image.secret + '_o.jpg';
-            //         console.log('boom');
-            //     } else {
-            //         console.log(image);
-            //     }
-            // });
+            results[1].photo.forEach(function(image) {
+                if(typeof image.farm !== undefined 
+                    && typeof image.server !== undefined 
+                    && typeof image.id !== undefined 
+                    && typeof image.secret !== undefined) 
+                {
+                    console.log(image);
+                    output[i++].image = 'http://farm' + image.farm + '.staticflickr.com/' + image.server + '/' + image.id + '_' + image.secret + '_b.jpg';
+                }
+            });
             response.json(output);
         }
     );
