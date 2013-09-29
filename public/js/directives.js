@@ -24,23 +24,18 @@ angular.module('myApp.directives', [])
 		});
 	};
 })
-.directive('leaderboard', function() {
+    .directive('leaderboard', function() {
 	return function(){console.log('hi leader');}
-	.directive('appVersion', function (version) {
-	    return function(scope, elm, attrs) {
-	      elm.text(version);
-	    };
-	  })
-})  
-.directive('timer', function() {
-	return (function countdown(remaining) {
-    if(remaining <= 0){
-        document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP!'
-    	return true;
-    }
-    document.getElementsByClassName('timer')[0].innerHTML = remaining;
-    setTimeout(function(){ countdown(remaining - 1); }, 1000);
-})(5);
+// })  
+// .directive('timer', function() {
+// 	return (function countdown(remaining) {
+//     if(remaining <= 0){
+//         document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP!'
+//     	return true;
+//     }
+//     document.getElementsByClassName('timer')[0].innerHTML = remaining;
+//     setTimeout(function(){ countdown(remaining - 1); }, 1000);
+// })(5);
 	// return function(){
 	// 	console.log('hi timer');
 	// 	var test2 = new Countdown( { style: "flip", time: 3600 } );

@@ -2,10 +2,10 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
-  'myApp.services',
-  'myApp.controllers',
-  'myApp.filters',
-  'myApp.directives'
+    'myApp.services',
+    'myApp.controllers',
+    'myApp.filters',
+    'myApp.directives'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
