@@ -140,6 +140,14 @@ body {
   font-weight: 300;
   font-size: 1.17em;
 }
+#vote_screen .voting-button-container {
+  margin: auto;
+  width: 300px;
+}
+#vote_screen .voting-button-container .voting-button {
+  width: 65px;
+  height: auto;
+}
 #vote_screen .item-container {
   height: 100%;
   background: url('../img/sushi.jpg') no-repeat center center fixed;
