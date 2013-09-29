@@ -26,37 +26,37 @@ angular.module('myApp.directives', [])
 		}
 	};
 })
-<<<<<<< HEAD
-.directive('leaderboard', function() {
-	return function(){console.log('hi leader');}
-	.directive('appVersion', function (version) {
-	    return function(scope, elm, attrs) {
-	      elm.text(version);
-	    };
-	  })
-})  
-.directive('timer', function() {
-	return function(scope){ return function countdown(remaining) {
-    if(remaining <= 0){
-        document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP! TO THE LEADRBARD'
-    	setTimeout(function(){
-    		//forward to leaderbord
-    		//HAve var here that sets to true. Then Controller watches for true.
+// <<<<<<< HEAD
+// .directive('leaderboard', function() {
+// 	return function(){console.log('hi leader');}
+// 	.directive('appVersion', function (version) {
+// 	    return function(scope, elm, attrs) {
+// 	      elm.text(version);
+// 	    };
+// 	  })
+// })  
+// .directive('timer', function() {
+// 	return function(scope){ return function countdown(remaining) {
+//     if(remaining <= 0){
+//         document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP! TO THE LEADRBARD'
+//     	setTimeout(function(){
+//     		//forward to leaderbord
+//     		//HAve var here that sets to true. Then Controller watches for true.
 
-    	},1000);
-    	return true;
-    }
-    document.getElementsByClassName('timer')[0].innerHTML = remaining;
-    setTimeout(function(){ countdown(remaining - 1); }, 1000);
-}(5);}
-	// return function(){
-	// 	console.log('hi timer');
-	// 	var test2 = new Countdown( { style: "flip", time: 3600 } );
-	// 	function countdownComplete(){
-	// 		alert("yo");
-	// 	}
-	// }
-=======
+//     	},1000);
+//     	return true;
+//     }
+//     document.getElementsByClassName('timer')[0].innerHTML = remaining;
+//     setTimeout(function(){ countdown(remaining - 1); }, 1000);
+// }(5);}
+// 	// return function(){
+// 	// 	console.log('hi timer');
+// 	// 	var test2 = new Countdown( { style: "flip", time: 3600 } );
+// 	// 	function countdownComplete(){
+// 	// 		alert("yo");
+// 	// 	}
+// 	// }
+// =======
 .directive('locationLookup', function() {
   	return function(scope, element, attrs) {
     	var autocomplete = new google.maps.places.Autocomplete(element[0]);
@@ -95,7 +95,6 @@ angular.module('myApp.directives', [])
 
         return geoInfo;
       }
->>>>>>> 51e4945285fe4cd08d8ace4b229dad762696cf75
 
     	google.maps.event.addListener(autocomplete, 'place_changed', function() {
       		var place = autocomplete.getPlace();
