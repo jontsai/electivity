@@ -72,6 +72,23 @@ exports.collection = function(request, response) {
     when.all(deferreds).then(
         function(results) {
             response.json(results);
+            // console.log(results.length);
+            // console.log(results);
+            // var output = results[0], i = 0;
+            // console.log(results[1].photo.length);
+            // results[1].photo.forEach(function(image) {
+            //     if(typeof image.farm !== undefined 
+            //         && typeof image.server !== undefined 
+            //         && typeof image.id !== undefined 
+            //         && typeof image.secret !== undefined) 
+            //     {
+            //         output[i++].image = 'http://farm' + image.farm + '.staticflickr.com/' + image.server + '/' + image.id + '_'+ image.secret + '_o.jpg';
+            //         console.log('boom');
+            //     } else {
+            //         console.log(image);
+            //     }
+            // });
+            // response.json(output);
         }
     );
 }
