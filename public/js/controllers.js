@@ -26,31 +26,38 @@ angular.module('myApp.controllers', ['angular-carousel']).
 		    });
 		};
 	})
-        .controller('ItemsController', function ($scope, $http, $q, $timeout) {
-            $scope.item = {
+    .controller('ItemsController', function ($scope, $http, $q, $timeout, $location) {
+        $scope.item = {
+            value: Math.random()
+        };
+
+        $scope.finished = false;
+        $scope.limit = 3;
+
+        $scope.$watch('finished', function (newValue) {
+        	console.log('updated to' + newValue);
+        	if (newValue === true) {
+        		$location.path('/survey/' + $scope.surveyId + '/results');
+        	}
+        })
+
+        $scope.next = function(item) {
+            var deferred = $q.defer();
+            var item = {
                 value: Math.random()
             };
+            deferred.resolve(item);
 
-            $scope.next = function(item) {
-                var deferred = $q.defer();
-                var item = {
-                    value: Math.random()
-                };
-                deferred.resolve(item);
+            return deferred.promise;
+        };
 
-                return deferred.promise;
+        $scope.prev = function(item) {
+            var deferred = $q.defer();
+            var item = {
+                value: Math.random()
             };
+            deferred.resolve(item);
 
-            $scope.prev = function(item) {
-                var deferred = $q.defer();
-                var item = {
-                    value: Math.random()
-                };
-                deferred.resolve(item);
-
-                return deferred.promise;
-            };
-
-
-
+            return deferred.promise;
+        };
   	});
