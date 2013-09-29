@@ -1,4 +1,9 @@
+# node/npm stuff
+npm-debug.log
 node_modules
 node_modules/*/node_modules
+
+# mac stuff
 .DS_Store
 **/.DS_Store
+

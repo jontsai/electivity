@@ -69,3 +69,9 @@ body{
   background-color: rgba(0,0,0,0.5);
   color: #ffffff;
 }
+
+.choice {
+   border: 1px solid;
+   width: 100%;
+   vertical-align: middle;
+}
