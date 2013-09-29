@@ -3,30 +3,28 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['angular-carousel']).
-	controller('AppController', function($scope, $rootScope, $http) {
-	$scope.surveyId = undefined;
-	})
-	.controller('IndexController', function($scope,$http, $routeParams) {
-	})
-	.controller('TypeController', function($scope,$http, $routeParams) {
-		$scope.type = $routeParams.type;
-	})
-	.controller('CreateController', function($scope, $http, $routeParams) {
-		console.log('Choose');
-		console.log($routeParams.type);
-		$scope.type = $routeParams.type;
-    
-		// $scope.form = {type: 'Food', location: 'London, UK'};
+	controller('AppController', function($scope, $rootScope, $http, $routeParams) {
 
+	})
+	.controller('ChooseController', function() {
+        console.log('Choose an activity');
+    })
+	.controller('CreateController', function($scope, $http, $routeParams) {
+        console.log('Create something');
+        $scope.type = $routeParams.type;
 		$scope.createSurvey = function() {
 			$http.post('/api/0/survey', $scope.form).success(
 		        function(result) {
-		          $scope.surveyId = result.id;
-		          $location.path('/survey/'+ $scope.surveyId);
+		          $scope.id = result.id;
+		          $location.path('/survey/'+ $scope.type + '/' + $scope.surveyId);
 		    });
 		};
 	})
-    .controller('ItemsController', function ($scope, $http, $q, $timeout, $location) {
+    .controller('ShareController', function($scope, $routeParams) {
+        $scope.id = $routeParams.id;
+        $scope.type = $routeParams.type;
+    })
+    .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
         $scope.item = {
             value: Math.random()
         };
@@ -60,4 +58,7 @@ angular.module('myApp.controllers', ['angular-carousel']).
 
             return deferred.promise;
         };
-  	});
+  	})
+    .controller('ResultsController', function($scope) {
+        console.log('show result');
+    });

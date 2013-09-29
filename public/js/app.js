@@ -11,15 +11,23 @@ config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
       templateUrl: '/templates/choose-screen',
-      controller: 'IndexController'
+      controller: 'ChooseController'
     }).
     when('/survey/:type', {
-      templateUrl: '/templates/create-survey',
+      templateUrl: '/templates/create-screen',
       controller: 'CreateController'
     }).
-    when('/select',{
-      templateUrl:'/templates/activity_items',
-      controller: 'ItemsController'
+    when('/survey/:type/:id/share', {
+      templateUrl: '/templates/share-screen',
+      controller: 'ShareController'
+    }).
+    when('/survey/:type/:id/vote',{
+      templateUrl:'/templates/vote-screen',
+      controller: 'VoteController'
+    }).
+    when('/survey/:type/:id/results',{
+      templateUrl:'/templates/results-screen',
+      controller: 'ResultsController'
     }).
     otherwise({
       redirectTo: '/'
