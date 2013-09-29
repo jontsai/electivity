@@ -26,6 +26,11 @@ angular.module('myApp.directives', [])
 })
 .directive('leaderboard', function() {
 	return function(){console.log('hi leader');}
+	.directive('appVersion', function (version) {
+	    return function(scope, elm, attrs) {
+	      elm.text(version);
+	    };
+	  })
 
 })  
 .directive('timer', function() {
