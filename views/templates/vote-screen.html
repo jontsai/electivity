@@ -1,16 +1,25 @@
 <div id="vote_screen" class="app-screen">
-  <h1 class="title">Swipe Left or Right to Vote</h1>
+  <h1 class="title">{{survey.message}}</h1>
+  <h2 class="subtitle">Swipe Left or Right to Vote</h2>
   <!--
       <timer limit='limit' finished='finished' class="timer">
         {{ limit }}
       </timer>
       -->
-  <div rn-carousel-infinite rn-carousel-current="item" rn-carousel-next="vote()" rn-carousel-prev="next()" class="basic">
-    <div class="item-container">
-      <div class="item">
-        <h3 class="title" ng-bind="item.name"></h3>
-        <span ng-repeat="category in item.categories">{{category}}</span>
-        <p>5/10 &#xb7; {{ item.distance }} miles</p>
-      </div>
+  <div ng-repeat="item in items">
+    <h3 ng-bind="item.name">Please wait...</h3>
+    <img width="50px" height="50px" ng-src="{{item.image}}">
+    <ul>
+      <li ng-repeat="category in item.categories">{{category}}</li>
+    </ul>
+    <button ng-click="like(item)">Like</button>
+    <button ng-click="dislike(item)">Dislike</button>
   </div>
+  
 </div>
+
+<script>
+YUI().use('scrollview', function(Y) {
+
+});
+</script>
