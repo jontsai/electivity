@@ -11,7 +11,8 @@ angular.module('myApp.directives', [])
 .directive('timer', function() {
 	return {
 		restrict: 'E',
-      	link: function (scope, elem) {
+      link: function (scope, elem) {
+        console.log('add timer');
 			function countdown(value) {
 				if(value <= 0){
 			    	scope.finished = true;
@@ -19,6 +20,7 @@ angular.module('myApp.directives', [])
 			    	return;
 		    	}
 		    	elem.text(value--);
+          console.log(value);
 		    	setTimeout(function(){ countdown(value); }, 1000);
 			};
 	    
@@ -76,7 +78,7 @@ angular.module('myApp.directives', [])
    var LEADERBOARD_SIZE = 5;
 
   // Create our Firebase reference
-  var scoreListRef = new Firebase('https://r4647oys5ai.firebaseio-demo.com//scoreList');
+  var scoreListRef = new Firebase('https://teamwinit.firebaseio.com/surveys/'+scope.survey.id+"/activities");
 //https://teamwinit.firebaseio.com//scoreList
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
   var htmlForPath = {};

@@ -1,25 +1,32 @@
 <div id="vote_screen" class="app-screen">
   <h1 class="title">{{survey.message}}</h1>
   <h2 class="subtitle">Swipe Left or Right to Vote</h2>
-  <!--
-      <timer limit='limit' finished='finished' class="timer">
-        {{ limit }}
-      </timer>
-      -->
-  <div ng-repeat="item in items">
-    <h3 ng-bind="item.name">Please wait...</h3>
-    <img width="50px" height="50px" ng-src="{{item.image}}">
+
+  <timer limit='limit' finished='finished' class="timer">
+    {{ limit }}
+  </timer>
+  <div id="scrollview-content" class="yui3-scrollview-loading">
     <ul>
-      <li ng-repeat="category in item.categories">{{category}}</li>
+      <li ng-repeat="item in items">
+        <div class="candidate">
+          <h3 ng-bind="item.name">Please wait...</h3>
+          <script type="type/x-template">
+            <img ng-src="{{item.image}}">
+          </script>
+          <ul>
+            <li ng-repeat="category in item.categories">{{category}}</li>
+          </ul>
+          <div class="pure-g-r voting-button-container">
+            <div class="pure-u-1-2">
+              <input type="image" src="img/cancel.png" class="voting-button" ng-click="dislike(item)">
+            </div>
+            <div class="pure-u-1-2">
+              <input type="image" src="img/accept.png" class="voting-button" ng-click="like(item)">
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
-    <input type="image" src="img/accept.png" width="150px" ng-click="like(item)">
-    <input type="image" src="img/cancel.png" width="150px" ng-click="dislike(item)">
   </div>
   
 </div>
-
-<script>
-YUI().use('scrollview', function(Y) {
-
-});
-</script>
