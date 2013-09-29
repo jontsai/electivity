@@ -9,19 +9,13 @@ angular.module('myApp.controllers', []).
   controller('IndexController', function ($scope, $http) {
     console.log('Choose');
   }).
-  controller('IndexController2', function ($scope, $http) {
+  controller('ItemsController', function ($scope, $http) {
     console.log('Swipe like mad');
+    $scope.msg="Yahoo Hackinz"
+    //need to paste activityItemTemp
+    $scope.items=[1,2,3,4];
 
-    // var elem = document.getElementById('mySwipe');
-    // window.mySwipe = Swipe(elem, {
-    //   startSlide: 4,
-    //   //auto: 3000,
-    //   continuous: true,
-    //   disableScroll: true,
-    //   stopPropagation: true,
-    //   callback: function(index, element) {},
-    //   transitionEnd: function(index, element) {}
-    // });
-    // $scope.msg="Yahoo Hackinz"
-
+  }).
+  controller('ItemController', function ($scope, $http) {
+    console.log('Choose');
   });

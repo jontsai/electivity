@@ -14,10 +14,10 @@ angular.module('myApp.directives', [])
 	  		console.log(elem);
 	  		console.log(elem[0]);
 		    window.mySwipe = Swipe(elem[0], {
-		      startSlide: 4,
-		      //auto: 3000,
+		      startSlide: 2,
+		      auto: 3000,
 		      continuous: true,
-		      disableScroll: true,
+		      disableScroll: false,
 		      stopPropagation: true,
 		      callback: function(index, element) {},
 		      transitionEnd: function(index, element) {}

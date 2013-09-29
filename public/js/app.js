@@ -15,7 +15,11 @@ config(function ($routeProvider, $locationProvider) {
     }).
     when('/select',{
       templateUrl:'templates/activity_items',
-      controller: 'IndexController2'
+      controller: 'ItemsController'
+    }).
+    when('/select/item',{
+      templateUrl:'templates/activity_item',
+      controller: 'ItemController'
     }).
     otherwise({
       redirectTo: '/'
