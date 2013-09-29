@@ -65,7 +65,7 @@ angular.module('myApp.directives', [])
         return geoInfo;
       }
 
-    	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    	google.maps.event.addListener(autocomplete, 'place_changed', function(value) {
       		var place = autocomplete.getPlace();
           scope.form.geoinfo = formatGeoInfo(place);
     	});

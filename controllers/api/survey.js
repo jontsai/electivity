@@ -22,7 +22,7 @@ exports.create = function(req, res) {
 	var type = req.body.type, 
 	query = req.body.query,
 	message = req.body.message,
-	location = req.body.location,
+	location = req.body.geoinfo.city,
 	limit = req.body.limit;
 
 	var ref = fb.push();
