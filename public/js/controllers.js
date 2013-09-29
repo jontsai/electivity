@@ -25,7 +25,12 @@ angular.module('myApp.controllers', ['angular-carousel']).
 	}).
   	controller('ItemsController', function ($scope, $http, $q, $timeout) {
 		console.log('Swipe like mad');
-
+    $scope.timesUp=false;
+    $scope.$watch('timesUp',function(){
+      //redirect to leaderboard
+      //$location.path('')
+      console.log('hi almost to leaderboard')
+    })
 		// infinite carousel stuff
 		var currentDay = (new Date()),
 		    colors = ['#339966', '#336699', '#cc9933', '#cc6633', '#cc3366', '#66cc33'],

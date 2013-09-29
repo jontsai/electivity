@@ -23,6 +23,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl:'templates/activity_items',
       controller: 'ItemsController'
     }).
+    when('/leaderboard',{
+      templateUrl:'templates/leaderboard',
+      //controller: 'LeaderboardController'
+    }).
     otherwise({
       redirectTo: '/'
     });

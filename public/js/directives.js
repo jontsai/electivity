@@ -33,11 +33,12 @@ angular.module('myApp.directives', [])
 	  })
 })  
 .directive('timer', function() {
-	return function(){ return function countdown(remaining) {
+	return function(scope){ return function countdown(remaining) {
     if(remaining <= 0){
         document.getElementsByClassName('timer')[0].innerHTML='RAWR TIMES UP! TO THE LEADRBARD'
     	setTimeout(function(){
     		//forward to leaderbord
+    		//HAve var here that sets to true. Then Controller watches for true.
 
     	},1000);
     	return true;
