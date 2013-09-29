@@ -13,6 +13,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'templates/choose-screen',
       controller: 'IndexController'
     }).
+    when('/select',{
+      templateUrl:'templates/activity_items',
+      controller: 'IndexController2'
+    }).
     otherwise({
       redirectTo: '/'
     });
