@@ -12,7 +12,7 @@ var _fbFlickr = _fb.child('flickr');
 var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
 //var localQuery='select * from local.search where query="sushi" and location="san francisco, ca"';
 var weatherQuery = 'SELECT * FROM weather.forecast WHERE (location = @location)';
-var flickrQuery = 'SELECT * FROM flickr.photos.interestingness(20) AND (api_key=@api_key)';
+var flickrQuery = 'SELECT * FROM flickr.photos.search WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
 
 function getFlickrInterestingPhotos() {
     var yqlQuery = new YQL.exec(flickrQuery, function(response) {

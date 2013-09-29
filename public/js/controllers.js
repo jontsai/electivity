@@ -17,7 +17,6 @@ angular.module('myApp.controllers', ['angular-carousel']).
 		$scope.type = $routeParams.type;
     
 		// $scope.form = {type: 'Food', location: 'London, UK'};
-
 		// $scope.createSurvey = function() {
 		// 	$http.post('/api/0/survey', $scope.form).success(
 		//         function(result) {
