@@ -19,7 +19,12 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.set('layout', 'layout/layout'); //rendering by default
-app.set('partials', {head: "layout/head"}); // add partials to be used here
+
+// add partials to be used here
+app.set('partials', {
+    head: "layout/header",
+    foot: "layout/footer",
+});
 app.engine('html', hoganExpress);
 app.use(express.static(path.join(__dirname, 'public')));
 
