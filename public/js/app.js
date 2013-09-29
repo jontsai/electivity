@@ -25,7 +25,7 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl:'/templates/vote-screen',
       controller: 'VoteController'
     }).
-    when('/results',{ ///survey/:type/:id/results
+    when('/survey/:type/:id/results',{ ///survey/:type/:id/results
       templateUrl:'/templates/results-screen',
       controller: 'ResultsController'
     }).
