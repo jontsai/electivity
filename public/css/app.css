@@ -88,6 +88,37 @@ body {
   font-family: Century Gothic, Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
+#choose_screen .choice {
+  /*    .rounded-base(5px);*/
+
+  /*    padding: 5px;*/
+
+  /*    background-color: rgba(0, 0, 0, 0.3);*/
+
+  font-family: Century Gothic, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+  width: 50%;
+}
+#choose_screen .choice:hover {
+  transition: 0.2s;
+  /*zoom: 130%;*/
+
+  cursor: pointer;
+}
+#choose_screen .choice:hover img {
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+#choose_screen .choice img {
+  height: auto;
+  width: 50px;
+}
+#choose_screen .choice p {
+  color: rgba(0, 0, 0, 0.8);
+}
 #share_screen .share-message {
   width: 340px;
   margin: auto;
@@ -136,39 +167,32 @@ body {
   font-size: 1em;
   font-family: Century Gothic, Helvetica, Arial, sans-serif;
 }
+#results_screen .leaderboard {
+  margin: auto;
+  width: 340px;
+}
+#results_screen .leaderboard ul li.leaderboard-result {
+  margin: 34px 0px;
+  border: 1px solid;
+  padding: 20px;
+}
+#results_screen .leaderboard ul li.leaderboard-result.first-place {
+  background-color: #c0392b;
+}
+#results_screen .leaderboard ul li.leaderboard-result.second-place {
+  /*background-color: @second-place-red;*/
+
+}
+#results_screen .leaderboard ul li.leaderboard-result.third-place {
+  /*background-color: @third-place-red;*/
+
+}
+#results_screen .leaderboard ul li.leaderboard-result.fourth-place {
+  /*background-color: @fourth-place-red;*/
+
+}
 a {
   text-decoration: none !important;
-}
-.choice {
-  /*    .rounded-base(5px);*/
-
-  /*    padding: 5px;*/
-
-  /*    background-color: rgba(0, 0, 0, 0.3);*/
-
-  font-family: Century Gothic, Helvetica, Arial, sans-serif;
-  color: rgba(0, 0, 0, 0.8);
-  margin: 0 auto;
-  text-align: center;
-  text-transform: uppercase;
-  width: 50%;
-}
-.choice:hover {
-  transition: 0.2s;
-  /*zoom: 130%;*/
-
-  cursor: pointer;
-}
-.choice:hover img {
-  margin-top: -5px;
-  margin-bottom: 5px;
-}
-.choice img {
-  height: auto;
-  width: 50px;
-}
-.choice p {
-  color: rgba(0, 0, 0, 0.8);
 }
 #one {
   margin-top: 50px;
