@@ -14,13 +14,15 @@ angular.module('myApp.directives', [])
       link: function (scope, elem) {
         console.log('add timer');
 			function countdown(value) {
-				if(value <= 0){
-			    	scope.finished = true;
+				  if(value <= 0){
+			    	scope.state= 2;
 			    	scope.$apply()
 			    	return;
 		    	}
-		    	elem.text(value--);
-          console.log(value);
+          if (scope.state === 1) {
+  		    	elem.text(value--);
+            console.log(value);
+          }
 		    	setTimeout(function(){ countdown(value); }, 1000);
 			};
 	    

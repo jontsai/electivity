@@ -9,10 +9,10 @@ exports.increment = function(req, res) {
 	activityRef.once('value', function(snapshot) {
 		if(snapshot.val() === null) {
 			activity.score = 1;
-			activityRef.setWithPriority(activity, 9999)
+			activityRef.setWithPriority(activity, activity.score)
 		} else {
 			activity.score = snapshot.val().score + 1;
-			activityRef.setWithPriority(activity, 9999);
+			activityRef.setWithPriority(activity, activity.score);
 		}
 		res.json({status: 'done'});
 	});

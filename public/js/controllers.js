@@ -62,12 +62,14 @@ angular.module('myApp.controllers', ['firebase']).
                 $http.get('/api/0/local/'+ survey.location +'/'+ survey.query + '/10').success(
                     function(result) {
                       $scope.items = result;
+                      $scope.state = 1;
+                      console.log('ready...go');
                 });
             }
         });
 
-        $scope.$watch('finished', function(val) {
-            if (val === true) {
+        $scope.$watch('state', function(val) {
+            if (val === 2) {
                 $location.path('/survey/' + $scope.survey.type + '/' + $scope.survey.id + '/results');
             }
         })
