@@ -76,6 +76,8 @@ body {
 .app-screen h1.title {
   font-size: 2.3em;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  margin-top: 0px;
+  margin-bottom: 55px;
 }
 .app-screen h1,
 .app-screen h2,
@@ -85,6 +87,19 @@ body {
 .app-screen h6 {
   font-family: Century Gothic, arial, sans-serif;
   font-weight: 300;
+}
+#share_screen .share-message {
+  width: 340px;
+  margin: auto;
+  margin-bottom: 36px;
+}
+#share_screen .share-message .label {
+  font-weight: 500;
+  font-size: 1.33em;
+}
+#share_screen .share-message .details {
+  font-weight: 300;
+  font-size: 1.17em;
 }
 a {
   text-decoration: none !important;

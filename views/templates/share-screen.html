@@ -1,10 +1,13 @@
 <div id="share_screen" class="app-screen">
   <h1 class="title">Share with your friends</h1>
 
-  <h3>Message:</h3><br/>
-  <h4>{{survey.message}}</h4><br/>
-  <h3>Location:</h3><br/>
-  <h4>{{survey.location}}</h4><br/>
+  <div class="share-message">
+    <span class="label">Message:&nbsp;</span>
+    <span class="details">{{survey.message}}</span><br/>
+    <br/>
+    <span class="label">Location:&nbsp;</span>
+    <span class="details"> {{survey.location}}</span><br/>
+  </div>
 
   <a href="/survey/{{survey.type}}/{{id}}/vote" class="pure-button primary-action-button">
     Start Survey
