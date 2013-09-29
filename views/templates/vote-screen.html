@@ -1,11 +1,10 @@
 <div id="vote_screen" class="app-screen">
   <h1 class="title">{{survey.message}}</h1>
   <h2 class="subtitle">Swipe Left or Right to Vote</h2>
-  <!--
-      <timer limit='limit' finished='finished' class="timer">
-        {{ limit }}
-      </timer>
-      -->
+
+  <timer limit='limit' finished='finished' class="timer">
+    {{ limit }}
+  </timer>
   <div id="scrollview-content" class="yui3-scrollview-loading">
     <ul>
       <li ng-repeat="item in items">
@@ -31,20 +30,3 @@
   </div>
   
 </div>
-
-<script>
-YUI().use('scrollview', function(Y) {
-Y.log('hellow rodl');
-    var scrollView = new Y.ScrollView({
-        id: 'scrollview',
-        srcNode: '#scrollview-content',
-        width: 320,
-        flick: {
-            minDistance:10,
-            minVelocity:0.3,
-            axis: "x"
-        }
-    });
-    scrollView.render();
-});
-</script>

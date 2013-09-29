@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
+angular.module('myApp.controllers', ['firebase']).
     controller('AppController', function($scope, $rootScope, $http, $routeParams, $location) {
 
 	// 	$scope.createSurvey = function() {
@@ -52,6 +52,7 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
     })
     .controller('VoteController', function($scope, $http, $routeParams, $q, $timeout, $location, angularFire) {
         $scope.items = [];
+        $scope.limit = 10;
         $scope.survey = { id: $routeParams.id };
         var ref = new Firebase("https://teamwinit.firebaseio.com/surveys/"+$routeParams.id);
         angularFire(ref, $scope, "survey");
@@ -65,17 +66,22 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
             }
         });
 
+        $scope.$watch('finished', function(val) {
+            if (val === true) {
+                $location.path('/survey/' + $scope.survey.type + '/' + $scope.survey.id + '/results');
+            }
+        })
+
         $scope.like = function(item) {
-            $scope.index += 1;
             console.log($scope.survey);
             $http.post('/api/0/survey/'+$scope.survey.id+'/activity/' + item.id, item).success(
                 function(result) {
                     console.log('Vote submitted');
-                    if($scope.items.length === 0) {
-                        $location.path('/survey/' + $scope.survey.id + '/results');
-                    }
-                  $scope.items.shift();   
             });
+            if($scope.items.length === 0) {
+                $location.path('/survey/' + $scope.survey.id + '/results');
+            }
+            $scope.items.shift();   
         };
 
         $scope.dislike = function(item) {
@@ -85,7 +91,8 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
             $scope.items.shift();
         };
     })
-    .controller('ResultsController', function($scope) {
-        console.log('show result');
+    .controller('ResultsController', function($scope, $routeParams) {
+        $scope.survey = {};
+        $scope.survey.id = $routeParams.id;
     })
    ;
