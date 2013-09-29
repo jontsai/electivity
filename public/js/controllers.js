@@ -76,6 +76,7 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
                 $location.path('/survey/' + $scope.surveyId + '/results');
             }
             $scope.item = item;
+
         };
     })
     .controller('ResultsController', function($scope) {

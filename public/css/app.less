@@ -140,6 +140,42 @@ body{
     }
 }
 
+#vote_screen {
+    .item-container {
+        height:100%;
+        background:url('../img/sushi.jpg') no-repeat center center fixed;
+        background:rgba(0,0,0,.31);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        position:relative;
+        text-align: center;
+
+        .item {
+            margin:0 auto;
+            max-width: 300px;
+            color: @white;
+            height: 50%;
+            overflow: auto;
+            line-height: 2.2em;
+            margin: auto;
+            position: absolute;
+            height:200px;
+            top: 0; left: 0; bottom: 0; right: 0;
+            h3 {
+                font-size:2.3em;
+                font-family: @font-century-gothic;
+            }
+            p {
+                all: default;
+                font-size: 1em;
+                font-family: @font-century-gothic;
+            }
+        }
+    }
+}
+
 a {
     text-decoration: none !important;
 }
