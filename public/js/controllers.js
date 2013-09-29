@@ -5,20 +5,25 @@
 angular.module('myApp.controllers', ['angular-carousel']).
 	controller('AppController', function($scope, $rootScope, $http) {
 	$scope.surveyId = undefined;
-	}).
-	controller('IndexController', function ($scope, $http) {
-	console.log('Choose');
-	$scope.form = {type: 'Food', location: 'London, UK'};
+	})
+	.controller('IndexController', function($scope,$http, $routeParams) {
+	})
+	.controller('TypeController', function($scope,$http, $routeParams) {
+		$scope.type = $routeParams.type;
+	})
+	.controller('CreateController', function ($scope, $http) {
+		console.log('Choose');
+		$scope.form = {type: 'Food', location: 'London, UK'};
 
-	$scope.createSurvey = function() {
-		$http.post('/api/0/survey', $scope.form).success(
-	        function(result) {
-	          $scope.surveyId = result.id;
-	          $location.path('/survey/'+ $scope.surveyId);
-	    });
-	};
+		$scope.createSurvey = function() {
+			$http.post('/api/0/survey', $scope.form).success(
+		        function(result) {
+		          $scope.surveyId = result.id;
+		          $location.path('/survey/'+ $scope.surveyId);
+		    });
+		};
 	}).
-  	controller('IndexController2', function ($scope, $http, $q, $timeout) {
+  	controller('ItemsController', function ($scope, $http, $q, $timeout) {
 		console.log('Swipe like mad');
 
 		// infinite carousel stuff

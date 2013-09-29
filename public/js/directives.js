@@ -31,7 +31,6 @@ angular.module('myApp.directives', [])
 	      elm.text(version);
 	    };
 	  })
-
 })  
 .directive('timer', function() {
 	return (function countdown(remaining) {

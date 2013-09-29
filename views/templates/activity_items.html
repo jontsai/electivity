@@ -1,35 +1,10 @@
-<p>{{msg}}</p>
-<style>
-.swipe {
-  overflow: hidden;
-  visibility: hidden;
-  position: relative;
-}
-.swipe-wrap {
-  //overflow: hidden;
-  position: relative;
-}
-.swipe-wrap > div {
-  float:left;
-  width:100%;
-  position: relative;
-}
-</style>
+
 <div timer class="timer">
     <img src="/public/img/drinks.png">
 
 </div>
-<div swiper id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
-    <div  class='swipe-wrap'  ng-include src="'templates/activity_item'" >
-        
-    </div>
-</div>
-<div style='text-align:center;padding-top:20px;'>
-  
-  <button onclick='mySwipe.prev()'>YUCK!</button> 
-  <button onclick='mySwipe.next()'>YUM!</button>
 
-</div>
+
 
 <ul rn-carousel class="image">
 <li>slide #1</li>
