@@ -1,4 +1,18 @@
 <form>
-	<input type="text" ng-model="form.query" placeholder="Sushi">
-	<input type="text" location-lookup ng-model="location">
+	<input type="hidden" ng-model="form.type">
+	<label for="message">Message</label>
+	<input name="message" type="text" ng-model="form.message">
+	<label for="filter">Filter</label>
+	<input name="filter" type="text" ng-model="form.query" placeholder="Sushi">
+	<label for="location">Location</label>
+	<input type="text" name="location" location-lookup ng-model="form.location">
+	<label for="limit">Time Limit</label>
+	<select name="limit" ng-model="form.limit">
+		<option>10</option>
+		<option>15</option>
+		<option>20</option>
+		<option>25</option>
+		<option>30</option>
+	</select>
+	<button ng-click="createSurvey()">
 </form>

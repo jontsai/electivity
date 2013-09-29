@@ -11,17 +11,22 @@ var _fbFlickr = _fb.child('flickr');
 
 var localQuery = 'SELECT * FROM local.search WHERE (query=@query) AND (location=@location)';
 //var localQuery='select * from local.search where query="sushi" and location="san francisco, ca"';
-var weatherQuery = 'SELECT * FROM weather.forecast WHERE (location = @location)';
-var flickrQuery = 'SELECT * FROM flickr.photos.search WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
+var weatherQuery = 'SELECT * FROM weather.forecast(0,30) WHERE (location = @location)';
+var flickrQuery = 'SELECT * FROM flickr.photos.search(0,30) WHERE has_geo=@has_geo AND text=@text and api_key=@api_key and sort=@sort';
 
-function getFlickrInterestingPhotos() {
+function getFlickrInterestingPhotos(query, location) {
+    var defer = when.defer();
     var yqlQuery = new YQL.exec(flickrQuery, function(response) {
-//        console.log(response);
-        //var results = response.query.results;
-        //_fbFlickr.push(results);
+        var results = response.query.results;
+        defer.resolve(results);
     }, {
-        'api_key' : FLICKR_API_KEY
+        'has_geo': true,
+        'text' : query + ' ' + location,
+        'api_key': FLICKR_API_KEY,
+        'sort': 'interestingness.desc'
     });
+
+    return defer.promise;
 }
 
 function getWeather(location) {
@@ -60,7 +65,11 @@ function getLocalSearchResults(query, location) {
 exports.getLocalSearchResults = getLocalSearchResults;
 
 exports.collection = function(request, response) {
-    getLocalSearchResults(request.params.query, request.params.location).then(
+    var deferreds = [];
+    deferreds.push(getLocalSearchResults(request.params.query, request.params.location));
+    deferreds.push(getFlickrInterestingPhotos(request.params.query, request.params.location))
+    
+    when.all(deferreds).then(
         function(results) {
             response.json(results);
         }

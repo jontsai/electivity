@@ -2,27 +2,28 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['angular-carousel']).
+angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
 	controller('AppController', function($scope, $rootScope, $http, $routeParams) {
 
 	})
 	.controller('ChooseController', function() {
         console.log('Choose an activity');
     })
-	.controller('CreateController', function($scope, $http, $routeParams) {
+	.controller('CreateController', function($scope, $http, $routeParams, $location) {
         console.log('Create something');
-        $scope.type = $routeParams.type;
+        $scope.form = { type: $routeParams.type, message: 'Where do you want to go tonight?'};
 		$scope.createSurvey = function() {
 			$http.post('/api/0/survey', $scope.form).success(
 		        function(result) {
 		          $scope.id = result.id;
-		          $location.path('/survey/'+ $scope.type + '/' + $scope.surveyId);
+		          $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
 		    });
 		};
 	})
-    .controller('ShareController', function($scope, $routeParams) {
-        $scope.id = $routeParams.id;
-        $scope.type = $routeParams.type;
+    .controller('ShareController', function($scope, $routeParams, angularFire) {
+        $scope.survey = { message: 'Waiting'};
+        var ref = new Firebase("https://teamwinit.firebaseio.com/survey/"+$routeParams.id);
+        angularFire(ref, $scope, "survey");
     })
     .controller('VoteController', function ($scope, $http, $q, $timeout, $location) {
         $scope.item = {
