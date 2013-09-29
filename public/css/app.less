@@ -122,6 +122,45 @@ body{
 }
 
 #choose_screen {
+    .choice-container {
+        margin: auto;
+        width: 370px;
+        .choice {
+            /*    .rounded-base(5px);*/
+            /*    padding: 5px;*/
+            /*    background-color: rgba(0, 0, 0, 0.3);*/
+            font-family: @font-century-gothic;
+            color:rgba(0,0,0,.8);
+            margin:0 auto;
+            text-align: center;
+            text-transform:uppercase;
+            width: 50%;
+            &:hover {
+                @displacement: 5px;
+                transition: 0.2s;
+                /*zoom: 130%;*/
+                cursor: pointer;
+                img {
+                    margin-top: -@displacement;
+                    margin-bottom: @displacement;
+                }
+            }
+            img {
+                height: 100px;
+                width: auto;
+            }
+            .activity-label {
+                color: @white;
+                font-size: 1.2em;
+            }
+        }
+    }
+}
+
+#create_screen {
+    .form-spacer {
+        height: 22px;
+    }
 }
 
 #share_screen {
@@ -176,41 +215,35 @@ body{
     }
 }
 
-a {
-    text-decoration: none !important;
-}
-
-.choice {
-/*    .rounded-base(5px);*/
-/*    padding: 5px;*/
-/*    background-color: rgba(0, 0, 0, 0.3);*/
-    font-family: @font-century-gothic;
-    color:rgba(0,0,0,.8);
-    margin:0 auto;
-    text-align: center;
-    text-transform:uppercase;
-    width: 50%;
-    &:hover {
-        @displacement: 5px;
-        transition: 0.2s;
-        /*zoom: 130%;*/
-        cursor: pointer;
-        img {
-            margin-top: -@displacement;
-            margin-bottom: @displacement;
+#results_screen {
+    .leaderboard {
+        margin: auto;
+        width: 340px;
+        ul {
+            li.leaderboard-result {
+                margin: 34px 0px;
+                border: 1px solid;
+                padding: 20px;
+                &.first-place {
+                    background-color: @first-place-red;
+                }
+                &.second-place {
+                    /*background-color: @second-place-red;*/
+                }
+                &.third-place {
+                    /*background-color: @third-place-red;*/
+                }
+                &.fourth-place {
+                    /*background-color: @fourth-place-red;*/
+                }
+                
+            }
         }
     }
-    img {
-        height:auto;
-        width:50px;
-    }
-    p {
-        color: rgba(0,0,0,.8);
-    }
 }
 
-#one {
-    margin-top:50px;
+a {
+    text-decoration: none !important;
 }
 
 .rn-carousel-container {
