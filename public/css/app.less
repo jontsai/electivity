@@ -8,6 +8,21 @@
 moment */
 }
 
+.placeholder-color(@color) {
+    &::-webkit-input-placeholder {
+        color: @color;
+    }
+    &:-moz-placeholder {
+        color: @color;
+    }
+    &::-moz-placeholder {
+        color: @color;
+    }
+    &:-ms-input-placeholder {
+        color: @color;
+    }
+}
+
 ul {
     li {
         list-style-type: none
@@ -159,6 +174,7 @@ a {
             font-weight: bold;
             line-height: 2em;
             color: @black;
+            .placeholder-color(@dark-gray);
         }
         input, .pure-input-rounded {
             .widget-base();

@@ -11,7 +11,10 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
     })
     .controller('CreateController', function($scope, $http, $routeParams, $location) {
         console.log('Create something');
-        $scope.form = { type: $routeParams.type, message: 'Where do you want to go tonight?'};
+        $scope.form = {
+            type: $routeParams.type,
+            limit: 20,
+        };
 	$scope.createSurvey = function() {
 	    $http.post('/api/0/survey', $scope.form).success(
 		function(result) {
