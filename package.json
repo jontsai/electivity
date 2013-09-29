@@ -9,6 +9,7 @@
     "when": "~2.3.0",
     "hogan-express": "~0.4.1",
     "yql": "~0.4.8",
-    "firebase": "~0.6.3"
+    "firebase": "~0.6.3",
+    "less": "~1.4.2"
   }
 }
