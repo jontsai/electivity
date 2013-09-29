@@ -13,15 +13,16 @@ angular.module('myApp.controllers', ['angular-carousel']).
 	})
 	.controller('CreateController', function ($scope, $http) {
 		console.log('Choose');
-		$scope.form = {type: 'Food', location: 'London, UK'};
+    
+		// $scope.form = {type: 'Food', location: 'London, UK'};
 
-		$scope.createSurvey = function() {
-			$http.post('/api/0/survey', $scope.form).success(
-		        function(result) {
-		          $scope.surveyId = result.id;
-		          $location.path('/survey/'+ $scope.surveyId);
-		    });
-		};
+		// $scope.createSurvey = function() {
+		// 	$http.post('/api/0/survey', $scope.form).success(
+		//         function(result) {
+		//           $scope.surveyId = result.id;
+		//           $location.path('/survey/'+ $scope.surveyId);
+		//     });
+		// };
 	}).
   	controller('ItemsController', function ($scope, $http, $q, $timeout) {
 		console.log('Swipe like mad');
