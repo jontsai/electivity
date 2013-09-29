@@ -3,23 +3,23 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
-	controller('AppController', function($scope, $rootScope, $http, $routeParams) {
+    controller('AppController', function($scope, $rootScope, $http, $routeParams, $location) {
 
-	})
-	.controller('ChooseController', function() {
+    })
+    .controller('ChooseController', function() {
         console.log('Choose an activity');
     })
-	.controller('CreateController', function($scope, $http, $routeParams, $location) {
+    .controller('CreateController', function($scope, $http, $routeParams, $location) {
         console.log('Create something');
         $scope.form = { type: $routeParams.type, message: 'Where do you want to go tonight?'};
-		$scope.createSurvey = function() {
-			$http.post('/api/0/survey', $scope.form).success(
-		        function(result) {
-		          $scope.id = result.id;
-		          $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
-		    });
-		};
-	})
+	$scope.createSurvey = function() {
+	    $http.post('/api/0/survey', $scope.form).success(
+		function(result) {
+		    $scope.id = result.id;
+		    $location.path('/survey/'+ $routeParams.type + '/' + $scope.id + '/share');
+		});
+	};
+    })
     .controller('ShareController', function($scope, $routeParams, angularFire) {
         $scope.survey = {};
         $scope.route.id = $routeParams.id;
@@ -71,7 +71,7 @@ angular.module('myApp.controllers', ['angular-carousel', 'firebase']).
 
             return deferred.promise;
         };
-  	})
+    })
     .controller('ResultsController', function($scope) {
         console.log('show result');
     });
