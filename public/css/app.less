@@ -66,32 +66,33 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 html {height:100%;}
 
 body{
-  height:100%;
-  min-height:100%;
-  background-size: 100% auto;
-  background: url("../img/background.png") no-repeat bottom center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    height:100%;
+    min-height:100%;
+    background-size: 100% auto;
+    background: url("../img/background.png") no-repeat bottom center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: @font-century-gothic;
 }
 
 #master{
-  height:400px;
-  width:50%;
-  margin: 0 auto;
+    height:400px;
+    width:50%;
+    margin: 0 auto;
 }
 
 #header{
-  background:url("../img/logo.png") no-repeat center center;
-  height:192px;
-  background-size:70px auto;
+    background:url("../img/logo.png") no-repeat center center;
+    height:192px;
+    background-size:70px auto;
 }
 
 .shadow {
-  -moz-box-shadow: 5px 5px 5px @shadow-color;
-  -webkit-box-shadow: 5px 5px 5px @shadow-color;
-  box-shadow: 5px 5px 5px @shadow-color;
+    -moz-box-shadow: 5px 5px 5px @shadow-color;
+    -webkit-box-shadow: 5px 5px 5px @shadow-color;
+    box-shadow: 5px 5px 5px @shadow-color;
 }
 
 .border {
@@ -106,12 +107,15 @@ body{
 .app-screen {
     margin: auto;
     text-align: center;
+    color: @white;
+
     h1.title {
+        font-size: 2.3em;
+        text-shadow: 0 0 3px rgba(0,0,0, 0.4);
+    }
+    h1, h2, h3, h4, h5, h6 {
         font-family: @font-century-gothic;
         font-weight: 300;
-        font-size: 2.3em;
-        color: @white;
-        text-shadow: 0 0 3px rgba(0,0,0, 0.4);
     }
 }
 
@@ -161,7 +165,7 @@ a {
 
 #create_screen {
     .create-form {
-        width: 300px;
+        width: 400px;
         margin: auto;
     }
     .pure-form {
@@ -173,7 +177,9 @@ a {
             border: 1px solid rgba(0,0,0,0.2);
             font-weight: bold;
             line-height: 2em;
+            font-size: 1em;
             color: @black;
+            font-family: @font-century-gothic;
             .placeholder-color(@dark-gray);
         }
         input, .pure-input-rounded {
@@ -184,20 +190,6 @@ a {
             height: 28px;
             width: 100%;
             /*-webkit-appearance: none;*/
-        }
-        #submit {
-            .rounded-base(2px);
-            margin:10px auto;
-            padding:10px 15px;
-            background:rgba(255,255,255,.2);
-            border:1px solid @white;
-            color: @white;
-            width:200px;
-            cursor:pointer;
-            background-color:rgba(255,255,255,.2);
-            &:hover {
-                box-shadow: 0px 0px 1px 3px rgba(255,255,255,.2);
-            }
         }
 
         #search {
@@ -212,3 +204,28 @@ a {
     }
 }
 
+.social-button-base() {
+    color: @white;
+    .rounded-base(5px);
+    font-family: @font-century-gothic;
+}
+
+.primary-action-button {
+    .social-button-base();
+    background-color: @emerald;
+    border: 1px solid @nephritis;
+    font-size: 1.3em;
+    &:hover {
+/*        background-*/
+    }
+}
+
+.facebook-button {
+    .social-button-base();
+    background-color: @facebook-blue;
+}
+
+.twitter-button {
+    .social-button-base();
+    background-color: @twitter-blue;
+}
